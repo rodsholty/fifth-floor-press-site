@@ -1,0 +1,141 @@
+:root {
+  --ink: #1c1c1c;
+  --paper: #faf8f4;
+  --accent: #7a2e2e;
+  --muted: #6b6b6b;
+  --line: #e2ddd3;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Georgia, 'Times New Roman', serif;
+  line-height: 1.6;
+}
+
+header {
+  border-bottom: 1px solid var(--line);
+  padding: 2rem 1.5rem 1.5rem;
+  text-align: center;
+}
+
+header .imprint {
+  font-size: 1.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+header .tagline {
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 0.4rem;
+}
+
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.2rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+nav a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 4px;
+}
+
+nav a:hover, nav a.active {
+  border-bottom-color: var(--accent);
+}
+
+main {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4rem;
+}
+
+h1 {
+  font-size: 1.7rem;
+  margin-bottom: 0.3rem;
+}
+
+h2 {
+  font-size: 1.3rem;
+  margin-top: 2.5rem;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 0.4rem;
+}
+
+.author-card {
+  display: block;
+  padding: 1.6rem;
+  margin: 1.5rem 0;
+  border: 1px solid var(--line);
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s ease;
+}
+
+.author-card:hover {
+  border-color: var(--accent);
+}
+
+.author-card h3 {
+  margin: 0 0 0.3rem;
+  font-size: 1.25rem;
+}
+
+.author-card p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.book {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.book:last-child { border-bottom: none; }
+
+.book .title {
+  font-weight: bold;
+  font-size: 1.05rem;
+}
+
+.book .meta {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.82rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.book .desc {
+  color: var(--muted);
+  margin-top: 0.3rem;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8rem;
+  color: var(--muted);
+  border-top: 1px solid var(--line);
+}
+
+footer a { color: var(--muted); }
+
+.placeholder {
+  font-style: italic;
+  color: var(--muted);
+}
