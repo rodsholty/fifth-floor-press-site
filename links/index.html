@@ -241,14 +241,9 @@
 <body>
 <a class="skip" href="#content">Skip to content</a>
 <!--
-  FEATURED BOOK
-  Change "featured" to the data-id of a cover in the grid below.
-  That is the only switch. The script copies that cover and its
-  Amazon links into the top slot. try-the-spirits is Try the Spirits.
+  Featured book and every Amazon link live in ../catalog.js.
+  Change CATALOG.featured to switch the book at the top.
 -->
-<script id="bio-config" type="application/json">
-{ "featured": "try-the-spirits" }
-</script>
 <div class="wrap">
   <header class="brand">
     <img src="../brand/header-mark.png" alt="" width="52" height="52">
@@ -268,74 +263,7 @@
     </section>
 
     <h2 class="all">All books</h2>
-    <div class="grid" id="grid">
-      <a class="tile" data-id="triage" data-title="Triage" data-author="Owen Kessler, MD" data-kindle="https://www.amazon.com/dp/B0HBRN3KB9" data-paper="https://www.amazon.com/dp/B0HKGKGJFR" href="https://www.amazon.com/dp/B0HBRN3KB9" rel="noopener">
-        <img src="../covers/triage.jpg" alt="" width="167" height="268">
-        <span class="tile-title">Triage</span>
-        <span class="tile-author">Owen Kessler, MD</span>
-      </a>
-      <a class="tile" data-id="golden-hour" data-title="Golden Hour" data-author="Owen Kessler, MD" data-kindle="https://www.amazon.com/dp/B0HJCZ1WHV" data-paper="https://www.amazon.com/dp/B0HKGMJCSF" href="https://www.amazon.com/dp/B0HJCZ1WHV" rel="noopener">
-        <img src="../covers/golden-hour.jpg" alt="" width="167" height="268">
-        <span class="tile-title">Golden Hour</span>
-        <span class="tile-author">Owen Kessler, MD</span>
-      </a>
-      <a class="tile" data-id="edema" data-title="Edema" data-author="Owen Kessler, MD" data-kindle="https://www.amazon.com/dp/B0HK3446QH" data-paper="https://www.amazon.com/dp/B0HKGKDRMG" href="https://www.amazon.com/dp/B0HK3446QH" rel="noopener">
-        <img src="../covers/edema.jpg" alt="" width="167" height="268">
-        <span class="tile-title">Edema</span>
-        <span class="tile-author">Owen Kessler, MD</span>
-      </a>
-      <a class="tile" data-id="resignation" data-title="Resignation" data-author="R. J. Marek" data-kindle="https://www.amazon.com/dp/B0H3M3XQ45" data-paper="https://www.amazon.com/dp/B0HMJRS5XF" href="https://www.amazon.com/dp/B0H3M3XQ45" rel="noopener">
-        <img src="../covers/resignation.jpg" alt="" width="167" height="268">
-        <span class="tile-title">Resignation</span>
-        <span class="tile-author">R. J. Marek</span>
-      </a>
-      <a class="tile" data-id="koshaku" data-title="Koshaku" data-author="R. J. Marek" data-kindle="https://www.amazon.com/dp/B0HL5MXW6R" data-paper="https://www.amazon.com/dp/B0HKH1K821" href="https://www.amazon.com/dp/B0HL5MXW6R" rel="noopener">
-        <img src="../covers/koshaku.jpg" alt="" width="167" height="268">
-        <span class="tile-title">Koshaku</span>
-        <span class="tile-author">R. J. Marek</span>
-      </a>
-      <a class="tile" data-id="candid" data-title="Candid" data-author="R. J. Marek" data-kindle="https://www.amazon.com/dp/B0HKH33C78" data-paper="https://www.amazon.com/dp/B0HKH51Z2S" href="https://www.amazon.com/dp/B0HKH33C78" rel="noopener">
-        <img src="../covers/candid.jpg" alt="" width="167" height="268">
-        <span class="tile-title">Candid</span>
-        <span class="tile-author">R. J. Marek</span>
-      </a>
-      <a class="tile" data-id="try-the-spirits" data-title="Try the Spirits" data-author="R. J. Marek" data-kindle="https://www.amazon.com/dp/B0HK1KGHK5" data-paper="https://www.amazon.com/dp/B0HK21F5SR" href="https://www.amazon.com/dp/B0HK1KGHK5" rel="noopener">
-        <img src="../covers/try-the-spirits.jpg" alt="" width="167" height="268">
-        <span class="tile-title">Try the Spirits</span>
-        <span class="tile-author">R. J. Marek</span>
-      </a>
-      <a class="tile" data-id="last-chair" data-title="Last Chair" data-author="R. J. Marek" data-kindle="https://www.amazon.com/dp/B0HCK37SJG" data-paper="https://www.amazon.com/dp/B0HCK9F65M" href="https://www.amazon.com/dp/B0HCK37SJG" rel="noopener">
-        <img src="../covers/last-chair.jpg" alt="" width="240" height="384">
-        <span class="tile-title">Last Chair</span>
-        <span class="tile-author">R. J. Marek</span>
-      </a>
-      <a class="tile" data-id="the-scattering" data-title="The Scattering" data-author="R. J. Marek" data-kindle="https://www.amazon.com/dp/B0HKGPR52R" data-paper="https://www.amazon.com/dp/B0HKH228V4" href="https://www.amazon.com/dp/B0HKGPR52R" rel="noopener">
-        <img src="../covers/the-scattering.jpg" alt="" width="167" height="268">
-        <span class="tile-title">The Scattering</span>
-        <span class="tile-author">R. J. Marek</span>
-      </a>
-      <a class="tile" data-id="the-long-winter" data-title="The Long Winter" data-author="R. J. Marek" data-kindle="https://www.amazon.com/dp/B0HNCPJHZY" data-paper="https://www.amazon.com/dp/B0HND1K8XD" href="https://www.amazon.com/dp/B0HNCPJHZY" rel="noopener">
-        <img src="../covers/the-long-winter.jpg" alt="" width="167" height="268">
-        <span class="tile-title">The Long Winter</span>
-        <span class="tile-author">R. J. Marek</span>
-      </a>
-      <a class="tile" data-id="eli" data-title="Eli" data-author="R. J. Marek" data-kindle="https://www.amazon.com/dp/B0HLTVTCT9" data-paper="https://www.amazon.com/dp/B0HKHN41FN" href="https://www.amazon.com/dp/B0HLTVTCT9" rel="noopener">
-        <img src="../covers/eli.jpg" alt="" width="168" height="252">
-        <span class="tile-title">Eli</span>
-        <span class="tile-author">R. J. Marek</span>
-      </a>
-      <a class="tile" data-id="settled" data-title="Settled" data-author="Claire Dare" data-kindle="https://www.amazon.com/dp/B0HMH53WPR" data-paper="https://www.amazon.com/dp/B0HMH46HM7" href="https://www.amazon.com/dp/B0HMH53WPR" rel="noopener">
-        <img src="../covers/settled.jpg" alt="" width="167" height="268">
-        <span class="tile-title">Settled</span>
-        <span class="tile-author">Claire Dare</span>
-      </a>
-      <a class="tile" data-id="natural" data-title="NATURAL" data-author="Claire Dare" data-kindle="https://www.amazon.com/dp/B0HPSN7R8D" data-paper="https://www.amazon.com/dp/B0HPSN7R8D" href="https://www.amazon.com/dp/B0HPSN7R8D" rel="noopener">
-        <img src="../covers/natural.jpg" alt="" width="167" height="267">
-        <span class="tile-title">NATURAL</span>
-        <span class="tile-author">Claire Dare</span>
-        <span class="tile-note">Paperback</span>
-      </a>
-    </div>
+    <div class="grid" id="bio-grid" data-prefix="../"></div>
 
     <p class="back"><a href="../index.html">Visit the press site</a></p>
 
@@ -357,38 +285,6 @@
     </section>
   </main>
 </div>
-<script>
-(function () {
-  var cfgEl = document.getElementById("bio-config");
-  if (!cfgEl) return;
-  var cfg = JSON.parse(cfgEl.textContent);
-  var id = String(cfg.featured || "").replace(/"/g, "");
-  var tile = document.querySelector('.tile[data-id="' + id + '"]');
-  if (!tile) return;
-  var title = tile.getAttribute("data-title");
-  var author = tile.getAttribute("data-author");
-  var kindle = tile.getAttribute("data-kindle");
-  var paper = tile.getAttribute("data-paper");
-  var img = tile.querySelector("img");
-  var cover = document.getElementById("featured-cover");
-  cover.src = img.getAttribute("src");
-  cover.width = img.width;
-  cover.height = img.height;
-  cover.alt = title + " cover";
-  document.getElementById("featured-title").textContent = title;
-  document.getElementById("featured-author").textContent = author;
-  var paperOnly = kindle === paper;
-  document.getElementById("featured-cover-link").href = paperOnly ? paper : kindle;
-  var kindleBtn = document.getElementById("featured-kindle");
-  kindleBtn.href = paperOnly ? paper : kindle;
-  kindleBtn.textContent = paperOnly ? "Paperback" : "Read on Kindle";
-  kindleBtn.setAttribute("aria-label", paperOnly ? ("Paperback of " + title) : ("Read " + title + " on Kindle"));
-  var paperBtn = document.getElementById("featured-paper");
-  paperBtn.href = paper;
-  paperBtn.hidden = paperOnly;
-  if (!paperOnly) paperBtn.removeAttribute("hidden");
-  paperBtn.setAttribute("aria-label", "Paperback of " + title);
-})();
-</script>
+<script src="../catalog.js"></script>
 </body>
 </html>
