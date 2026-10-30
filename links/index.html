@@ -21,6 +21,7 @@
     --accent-dark: #5c2222;
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   body {
     margin: 0;
     background: var(--bg);
@@ -162,6 +163,17 @@
     font-family: Arial, Helvetica, sans-serif;
     font-size: 0.72rem;
     letter-spacing: 0.03em;
+  }
+  .tile-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    margin-top: 0.45rem;
+    border: 1px solid rgba(246, 241, 234, 0.45);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.85rem;
+    color: var(--ink);
   }
   .tile:active img { opacity: 0.86; }
   .back, .signup {
@@ -317,14 +329,12 @@
         <span class="tile-title">Settled</span>
         <span class="tile-author">Claire Dare</span>
       </a>
-      <!--
-        NATURAL — Claire Dare, A Nora Bishop Novel.
-        No Amazon link for this title is in the repo yet, so it is not shown.
-        When a Kindle URL exists, add a tile like the others:
-        data-id="natural" data-title="NATURAL" data-author="Claire Dare"
-        data-kindle="https://www.amazon.com/dp/XXXXXXXXXX"
-        href set to that Kindle URL, rel="noopener", and a cover at ../covers/natural.jpg
-      -->
+      <a class="tile" data-id="natural" data-title="NATURAL" data-author="Claire Dare" data-kindle="https://www.amazon.com/dp/B0HPSN7R8D" data-paper="https://www.amazon.com/dp/B0HPSN7R8D" href="https://www.amazon.com/dp/B0HPSN7R8D" rel="noopener">
+        <img src="../covers/natural.jpg" alt="" width="167" height="267">
+        <span class="tile-title">NATURAL</span>
+        <span class="tile-author">Claire Dare</span>
+        <span class="tile-note">Paperback</span>
+      </a>
     </div>
 
     <p class="back"><a href="../index.html">Visit the press site</a></p>
@@ -367,12 +377,16 @@
   cover.alt = title + " cover";
   document.getElementById("featured-title").textContent = title;
   document.getElementById("featured-author").textContent = author;
-  document.getElementById("featured-cover-link").href = kindle;
+  var paperOnly = kindle === paper;
+  document.getElementById("featured-cover-link").href = paperOnly ? paper : kindle;
   var kindleBtn = document.getElementById("featured-kindle");
-  kindleBtn.href = kindle;
-  kindleBtn.setAttribute("aria-label", "Read " + title + " on Kindle");
+  kindleBtn.href = paperOnly ? paper : kindle;
+  kindleBtn.textContent = paperOnly ? "Paperback" : "Read on Kindle";
+  kindleBtn.setAttribute("aria-label", paperOnly ? ("Paperback of " + title) : ("Read " + title + " on Kindle"));
   var paperBtn = document.getElementById("featured-paper");
   paperBtn.href = paper;
+  paperBtn.hidden = paperOnly;
+  if (!paperOnly) paperBtn.removeAttribute("hidden");
   paperBtn.setAttribute("aria-label", "Paperback of " + title);
 })();
 </script>
