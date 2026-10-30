@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#100e0c">
+<meta name="color-scheme" content="dark">
+<title>Links — Fifth Floor Press</title>
+<meta name="description" content="Books from Fifth Floor Press. One tap from the bio link to a book on Amazon.">
+<link rel="icon" href="../brand/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../brand/favicon-32.png">
+<link rel="apple-touch-icon" href="../brand/apple-touch-icon.png">
+<style>
+  :root {
+    --ink: #f6f1ea;
+    --muted: #c9bfb4;
+    --bg: #100e0c;
+    --panel: #1a1614;
+    --line: rgba(246, 241, 234, 0.14);
+    --accent: #7a2e2e;
+    --accent-dark: #5c2222;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.45;
+  }
+  .skip {
+    position: absolute;
+    left: 0.75rem;
+    top: 0;
+    transform: translateY(-150%);
+    background: var(--accent);
+    color: var(--ink);
+    padding: 0.7rem 1rem;
+    z-index: 5;
+    text-decoration: none;
+  }
+  .skip:focus { transform: translateY(0.5rem); }
+  .wrap {
+    max-width: 28rem;
+    margin: 0 auto;
+    padding: 1.35rem 1.15rem calc(2rem + env(safe-area-inset-bottom));
+  }
+  .brand {
+    text-align: center;
+    margin-bottom: 1.35rem;
+  }
+  .brand img {
+    width: 52px;
+    height: 52px;
+    box-shadow: 0 0 0 1px rgba(246, 241, 234, 0.35);
+  }
+  .brand p {
+    margin: 0.7rem 0 0;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  .featured {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 1.2rem 1.05rem 1.15rem;
+    text-align: center;
+  }
+  .kicker {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #f0d2d0;
+  }
+  .featured-cover {
+    display: block;
+    width: min(68vw, 240px);
+    margin: 0.9rem auto 0.85rem;
+    line-height: 0;
+  }
+  .featured-cover img {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+  }
+  .featured h1 {
+    margin: 0;
+    font-size: 1.85rem;
+    font-weight: normal;
+    line-height: 1.15;
+  }
+  .byline {
+    margin: 0.35rem 0 0;
+    font-style: italic;
+    color: var(--muted);
+  }
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 4px;
+  }
+  .btn-kindle {
+    min-height: 56px;
+    margin-top: 1rem;
+    background: var(--accent);
+    color: #faf8f4;
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+  .btn-kindle:active { background: var(--accent-dark); }
+  .btn-paper {
+    min-height: 44px;
+    margin-top: 0.55rem;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid rgba(246, 241, 234, 0.45);
+    font-size: 0.95rem;
+  }
+  .btn-paper:active { background: rgba(246, 241, 234, 0.08); }
+  .all {
+    margin: 1.6rem 0 0.85rem;
+    font-size: 1.15rem;
+    font-weight: normal;
+    letter-spacing: 0.04em;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.05rem 0.75rem;
+  }
+  .tile {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    min-width: 0;
+  }
+  .tile img {
+    width: 100%;
+    height: auto;
+    display: block;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
+    background: #2a2420;
+  }
+  .tile-title {
+    display: block;
+    margin-top: 0.45rem;
+    font-size: 0.98rem;
+    line-height: 1.25;
+  }
+  .tile-author {
+    display: block;
+    margin-top: 0.15rem;
+    color: var(--muted);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+  }
+  .tile:active img { opacity: 0.86; }
+  .back, .signup {
+    margin-top: 1.75rem;
+    text-align: center;
+  }
+  .back a {
+    color: #f0d2d0;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.92rem;
+  }
+  .signup {
+    text-align: left;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+  }
+  .signup h2 {
+    margin: 0 0 0.4rem;
+    font-size: 1.15rem;
+    font-weight: normal;
+    text-align: center;
+  }
+  .signup p { margin: 0.35rem 0; color: var(--muted); font-size: 0.95rem; }
+  .signup label {
+    display: block;
+    margin-top: 0.8rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .signup input {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 0.35rem;
+    padding: 0.55rem 0.7rem;
+    font: inherit;
+    color: var(--ink);
+    background: #221e1b;
+    border: 1px solid #5c534c;
+  }
+  .signup button {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 0.65rem;
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid rgba(246, 241, 234, 0.45);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+  .form-note { font-size: 0.85rem !important; }
+  a:focus-visible, button:focus-visible, input:focus-visible, .skip:focus {
+    outline: 3px solid #f6f1ea;
+    outline-offset: 3px;
+  }
+  @media (min-width: 720px) {
+    .grid { grid-template-columns: 1fr 1fr 1fr; }
+    .wrap { max-width: 40rem; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<!--
+  FEATURED BOOK
+  Change "featured" to the data-id of a cover in the grid below.
+  That is the only switch. The script copies that cover and its
+  Amazon links into the top slot. try-the-spirits is Try the Spirits.
+-->
+<script id="bio-config" type="application/json">
+{ "featured": "try-the-spirits" }
+</script>
+<div class="wrap">
+  <header class="brand">
+    <img src="../brand/header-mark.png" alt="" width="52" height="52">
+    <p>Fifth Floor Press</p>
+  </header>
+
+  <main id="content">
+    <section class="featured" id="featured" aria-label="Featured now">
+      <p class="kicker">Featured now</p>
+      <a class="featured-cover" id="featured-cover-link" href="https://www.amazon.com/dp/B0HK1KGHK5" rel="noopener">
+        <img id="featured-cover" src="../covers/try-the-spirits.jpg" alt="Try the Spirits cover" width="167" height="268">
+      </a>
+      <h1 id="featured-title">Try the Spirits</h1>
+      <p class="byline" id="featured-author">R. J. Marek</p>
+      <a class="btn btn-kindle" id="featured-kindle" href="https://www.amazon.com/dp/B0HK1KGHK5" rel="noopener">Read on Kindle</a>
+      <a class="btn btn-paper" id="featured-paper" href="https://www.amazon.com/dp/B0HK21F5SR" rel="noopener">Paperback</a>
+    </section>
+
+    <h2 class="all">All books</h2>
+    <div class="grid" id="grid">
+      <a class="tile" data-id="triage" data-title="Triage" data-author="Owen Kessler, MD" data-kindle="https://www.amazon.com/dp/B0HBRN3KB9" data-paper="https://www.amazon.com/dp/B0HKGKGJFR" href="https://www.amazon.com/dp/B0HBRN3KB9" rel="noopener">
+        <img src="../covers/triage.jpg" alt="" width="167" height="268">
+        <span class="tile-title">Triage</span>
+        <span class="tile-author">Owen Kessler, MD</span>
+      </a>
+      <a class="tile" data-id="golden-hour" data-title="Golden Hour" data-author="Owen Kessler, MD" data-kindle="https://www.amazon.com/dp/B0HJCZ1WHV" data-paper="https://www.amazon.com/dp/B0HKGMJCSF" href="https://www.amazon.com/dp/B0HJCZ1WHV" rel="noopener">
+        <img src="../covers/golden-hour.jpg" alt="" width="167" height="268">
+        <span class="tile-title">Golden Hour</span>
+        <span class="tile-author">Owen Kessler, MD</span>
+      </a>
+      <a class="tile" data-id="edema" data-title="Edema" data-author="Owen Kessler, MD" data-kindle="https://www.amazon.com/dp/B0HK3446QH" data-paper="https://www.amazon.com/dp/B0HKGKDRMG" href="https://www.amazon.com/dp/B0HK3446QH" rel="noopener">
+        <img src="../covers/edema.jpg" alt="" width="167" height="268">
+        <span class="tile-title">Edema</span>
+        <span class="tile-author">Owen Kessler, MD</span>
+      </a>
+      <a class="tile" data-id="resignation" data-title="Resignation" data-author="R. J. Marek" data-kindle="https://www.amazon.com/dp/B0H3M3XQ45" data-paper="https://www.amazon.com/dp/B0HMJRS5XF" href="https://www.amazon.com/dp/B0H3M3XQ45" rel="noopener">
+        <img src="../covers/resignation.jpg" alt="" width="167" height="268">
+        <span class="tile-title">Resignation</span>
+        <span class="tile-author">R. J. Marek</span>
+      </a>
+      <a class="tile" data-id="koshaku" data-title="Koshaku" data-author="R. J. Marek" data-kindle="https://www.amazon.com/dp/B0HL5MXW6R" data-paper="https://www.amazon.com/dp/B0HKH1K821" href="https://www.amazon.com/dp/B0HL5MXW6R" rel="noopener">
+        <img src="../covers/koshaku.jpg" alt="" width="167" height="268">
+        <span class="tile-title">Koshaku</span>
+        <span class="tile-author">R. J. Marek</span>
+      </a>
+      <a class="tile" data-id="candid" data-title="Candid" data-author="R. J. Marek" data-kindle="https://www.amazon.com/dp/B0HKH33C78" data-paper="https://www.amazon.com/dp/B0HKH51Z2S" href="https://www.amazon.com/dp/B0HKH33C78" rel="noopener">
+        <img src="../covers/candid.jpg" alt="" width="167" height="268">
+        <span class="tile-title">Candid</span>
+        <span class="tile-author">R. J. Marek</span>
+      </a>
+      <a class="tile" data-id="try-the-spirits" data-title="Try the Spirits" data-author="R. J. Marek" data-kindle="https://www.amazon.com/dp/B0HK1KGHK5" data-paper="https://www.amazon.com/dp/B0HK21F5SR" href="https://www.amazon.com/dp/B0HK1KGHK5" rel="noopener">
+        <img src="../covers/try-the-spirits.jpg" alt="" width="167" height="268">
+        <span class="tile-title">Try the Spirits</span>
+        <span class="tile-author">R. J. Marek</span>
+      </a>
+      <a class="tile" data-id="last-chair" data-title="Last Chair" data-author="R. J. Marek" data-kindle="https://www.amazon.com/dp/B0HCK37SJG" data-paper="https://www.amazon.com/dp/B0HCK9F65M" href="https://www.amazon.com/dp/B0HCK37SJG" rel="noopener">
+        <img src="../covers/last-chair.jpg" alt="" width="240" height="384">
+        <span class="tile-title">Last Chair</span>
+        <span class="tile-author">R. J. Marek</span>
+      </a>
+      <a class="tile" data-id="the-scattering" data-title="The Scattering" data-author="R. J. Marek" data-kindle="https://www.amazon.com/dp/B0HKGPR52R" data-paper="https://www.amazon.com/dp/B0HKH228V4" href="https://www.amazon.com/dp/B0HKGPR52R" rel="noopener">
+        <img src="../covers/the-scattering.jpg" alt="" width="167" height="268">
+        <span class="tile-title">The Scattering</span>
+        <span class="tile-author">R. J. Marek</span>
+      </a>
+      <a class="tile" data-id="the-long-winter" data-title="The Long Winter" data-author="R. J. Marek" data-kindle="https://www.amazon.com/dp/B0HNCPJHZY" data-paper="https://www.amazon.com/dp/B0HND1K8XD" href="https://www.amazon.com/dp/B0HNCPJHZY" rel="noopener">
+        <img src="../covers/the-long-winter.jpg" alt="" width="167" height="268">
+        <span class="tile-title">The Long Winter</span>
+        <span class="tile-author">R. J. Marek</span>
+      </a>
+      <a class="tile" data-id="eli" data-title="Eli" data-author="R. J. Marek" data-kindle="https://www.amazon.com/dp/B0HLTVTCT9" data-paper="https://www.amazon.com/dp/B0HKHN41FN" href="https://www.amazon.com/dp/B0HLTVTCT9" rel="noopener">
+        <img src="../covers/eli.jpg" alt="" width="168" height="252">
+        <span class="tile-title">Eli</span>
+        <span class="tile-author">R. J. Marek</span>
+      </a>
+      <a class="tile" data-id="settled" data-title="Settled" data-author="Claire Dare" data-kindle="https://www.amazon.com/dp/B0HMH53WPR" data-paper="https://www.amazon.com/dp/B0HMH46HM7" href="https://www.amazon.com/dp/B0HMH53WPR" rel="noopener">
+        <img src="../covers/settled.jpg" alt="" width="167" height="268">
+        <span class="tile-title">Settled</span>
+        <span class="tile-author">Claire Dare</span>
+      </a>
+      <!--
+        NATURAL — Claire Dare, A Nora Bishop Novel.
+        No Amazon link for this title is in the repo yet, so it is not shown.
+        When a Kindle URL exists, add a tile like the others:
+        data-id="natural" data-title="NATURAL" data-author="Claire Dare"
+        data-kindle="https://www.amazon.com/dp/XXXXXXXXXX"
+        href set to that Kindle URL, rel="noopener", and a cover at ../covers/natural.jpg
+      -->
+    </div>
+
+    <p class="back"><a href="../index.html">Visit the press site</a></p>
+
+    <section class="signup" aria-labelledby="list-heading">
+      <h2 id="list-heading">Hear when a book is free</h2>
+      <p>Send your email to Fifth Floor Press for a short note when a title is free on Amazon.</p>
+      <!--
+        TODO (owner): This form is not connected to a mailing-list service.
+        It opens an email to info@fifthfloorpressbooks.com. To collect a list,
+        replace the form with the embed your provider gives you, then remove
+        this comment and the sentence under the button.
+      -->
+      <form action="mailto:info@fifthfloorpressbooks.com?subject=Free%20book%20note" method="post" enctype="text/plain">
+        <label for="list-email">Email</label>
+        <input id="list-email" name="email" type="email" required autocomplete="email" inputmode="email">
+        <button type="submit">Email the press</button>
+      </form>
+      <p class="form-note">Until a mailing list is connected, this opens an email to info@fifthfloorpressbooks.com.</p>
+    </section>
+  </main>
+</div>
+<script>
+(function () {
+  var cfgEl = document.getElementById("bio-config");
+  if (!cfgEl) return;
+  var cfg = JSON.parse(cfgEl.textContent);
+  var id = String(cfg.featured || "").replace(/"/g, "");
+  var tile = document.querySelector('.tile[data-id="' + id + '"]');
+  if (!tile) return;
+  var title = tile.getAttribute("data-title");
+  var author = tile.getAttribute("data-author");
+  var kindle = tile.getAttribute("data-kindle");
+  var paper = tile.getAttribute("data-paper");
+  var img = tile.querySelector("img");
+  var cover = document.getElementById("featured-cover");
+  cover.src = img.getAttribute("src");
+  cover.width = img.width;
+  cover.height = img.height;
+  cover.alt = title + " cover";
+  document.getElementById("featured-title").textContent = title;
+  document.getElementById("featured-author").textContent = author;
+  document.getElementById("featured-cover-link").href = kindle;
+  var kindleBtn = document.getElementById("featured-kindle");
+  kindleBtn.href = kindle;
+  kindleBtn.setAttribute("aria-label", "Read " + title + " on Kindle");
+  var paperBtn = document.getElementById("featured-paper");
+  paperBtn.href = paper;
+  paperBtn.setAttribute("aria-label", "Paperback of " + title);
+})();
+</script>
+</body>
+</html>
