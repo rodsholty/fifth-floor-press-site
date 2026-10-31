@@ -111,7 +111,7 @@ The floor numerals I–IV and the lit V are `aria-hidden`. The same fact is in t
 
 The old form’s own comment said it was a placeholder and that no address was stored. It asked for an email and a button labeled “Email the press”.
 
-It is now a real form: email, optional first name, a required consent checkbox for the weekly note, a honeypot, and success / error / “opening soon” states. It `POST`s JSON with `fetch` to `SIGNUP_ENDPOINT` in `signup-config.js`. That constant is blank, so the form says signups are opening soon and does not pretend to save. The Apps Script that writes a Google Sheet is in `backend/apps-script/`, with deploy steps in `DEPLOY.md`. Unsubscribe is `unsubscribe.html` plus a `doGet` token handler.
+It is now a real form: email, optional first name, a required consent checkbox for the weekly note, a honeypot, and success / error / “opening soon” states. It `POST`s JSON with `fetch` to `SIGNUP_ENDPOINT` in `signup-config.js`. The owner deployed the Apps Script and the constant is set to that web app, so a real signup is stored. Clearing the constant brings back the “opening soon” message and sends nothing. The script and deploy notes are in `backend/apps-script/`. Unsubscribe is `unsubscribe.html` plus a `doGet` token handler.
 
 ## Promo window
 
@@ -119,7 +119,6 @@ It is now a real form: email, optional first name, a required consent checkbox f
 
 ## What still needs the owner
 
-- Deploy the Apps Script (`backend/apps-script/DEPLOY.md`) and paste the `/exec` URL into `SIGNUP_ENDPOINT` in `signup-config.js`. Until then the form honestly says signups are opening soon.
 - Paste *REVER* Kindle and paperback ASINs into `REVER_KINDLE_ASIN` and `REVER_PAPER_ASIN` in `catalog.js` when KDP assigns them.
 - A Kindle ASIN for *NATURAL*, if that edition is coming. The paperback link is live.
 - Higher-resolution covers (around 800px wide) if the shelf should look sharp on large monitors.

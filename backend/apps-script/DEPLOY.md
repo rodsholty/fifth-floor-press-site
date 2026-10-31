@@ -1,6 +1,6 @@
 # Connect the weekly note
 
-The website form does not store addresses until this is deployed and the `/exec` URL is pasted into `signup-config.js`. Until then the form says signups are opening soon.
+The live site already points `SIGNUP_ENDPOINT` in `signup-config.js` at the deployed web app. Use these steps to replace that deployment. An empty `SIGNUP_ENDPOINT` makes the form say signups are opening soon and sends nothing.
 
 You need a Google account that should own the list. The sheet stays private. Only the web app URL is public, and it can only add or unsubscribe an address.
 
