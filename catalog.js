@@ -61,7 +61,7 @@ function findBook(id) {
 
 function renderShop(root) {
   var prefix = root.getAttribute("data-prefix") || "";
-  CATALOG.books.forEach(function (book) {
+  CATALOG.books.forEach(function (book, i) {
     var card = document.createElement("article");
     card.className = "shop-card";
     var kindleHref = editionHref(book, "kindle");
@@ -71,15 +71,22 @@ function renderShop(root) {
     cover.className = "shop-cover";
     cover.href = primary;
     cover.target = "_blank";
-    cover.rel = "noopener";
+    cover.rel = "noopener noreferrer";
     cover.setAttribute("aria-label", book.title + " by " + book.author + " on Amazon");
     var img = document.createElement("img");
     img.src = prefix + book.cover;
-    img.alt = book.title + " cover";
+    img.alt = "Cover of " + book.title + " by " + book.author;
     img.width = book.w;
     img.height = book.h;
+    img.loading = "lazy";
+    img.decoding = "async";
     cover.appendChild(img);
     card.appendChild(cover);
+    var mark = document.createElement("p");
+    mark.className = "file-no";
+    var num = i + 1;
+    mark.textContent = "V / " + (num < 10 ? "0" + num : String(num));
+    card.appendChild(mark);
     var h = document.createElement("h3");
     var titleLink = document.createElement("a");
     titleLink.href = book.page;
@@ -120,7 +127,7 @@ function comingSoonLink(book, label) {
   a.className = "buy-link buy-soon";
   a.href = amazonSearch(book);
   a.target = "_blank";
-  a.rel = "noopener";
+  a.rel = "noopener noreferrer";
   a.textContent = label || "Coming soon to Amazon";
   a.setAttribute("aria-label", book.title + " by " + book.author + " is coming soon to Amazon");
   return a;
@@ -142,7 +149,7 @@ function buyLink(href, cls, label, aria) {
   a.className = "buy-link " + cls;
   a.href = href;
   a.target = "_blank";
-  a.rel = "noopener";
+  a.rel = "noopener noreferrer";
   a.textContent = label;
   a.setAttribute("aria-label", aria);
   return a;
@@ -158,7 +165,7 @@ function renderBioGrid(root) {
     var a = document.createElement("a");
     a.className = "tile";
     a.href = dest;
-    a.rel = "noopener";
+    a.rel = "noopener noreferrer";
     a.setAttribute("data-id", book.id);
     a.setAttribute("data-title", book.title);
     a.setAttribute("data-author", book.author);
@@ -170,6 +177,8 @@ function renderBioGrid(root) {
     img.alt = "";
     img.width = book.w;
     img.height = book.h;
+    img.loading = "lazy";
+    img.decoding = "async";
     a.appendChild(img);
     var title = document.createElement("span");
     title.className = "tile-title";
@@ -214,16 +223,19 @@ function applyFeaturedBook() {
   document.getElementById("featured-author").textContent = author;
   var paperOnly = !kindle && !!paper;
   var pending = !kindle && !paper;
-  document.getElementById("featured-cover-link").href = kindle || paper || search;
+  var coverLink = document.getElementById("featured-cover-link");
+  coverLink.href = kindle || paper || search;
+  coverLink.setAttribute("aria-label", title + " by " + author + " on Amazon");
   var kindleBtn = document.getElementById("featured-kindle");
   kindleBtn.href = pending ? search : (paperOnly ? paper : kindle);
-  kindleBtn.textContent = pending ? "Coming soon to Amazon" : (paperOnly ? "Paperback" : "Read on Kindle");
-  kindleBtn.setAttribute("aria-label", pending ? (title + " is coming soon on Amazon") : (paperOnly ? ("Paperback of " + title) : ("Read " + title + " on Kindle")));
+  kindleBtn.textContent = pending ? "Coming soon to Amazon" : (paperOnly ? "Buy Paperback" : "Buy on Kindle");
+  kindleBtn.setAttribute("aria-label", pending ? (title + " is coming soon on Amazon") : (paperOnly ? ("Buy Paperback of " + title) : ("Buy " + title + " on Kindle")));
   var paperBtn = document.getElementById("featured-paper");
   paperBtn.href = paper || search;
+  paperBtn.textContent = "Buy Paperback";
   if (paperOnly || pending) paperBtn.setAttribute("hidden", "");
   else paperBtn.removeAttribute("hidden");
-  paperBtn.setAttribute("aria-label", "Paperback of " + title);
+  paperBtn.setAttribute("aria-label", "Buy Paperback of " + title);
 }
 
 renderFifthFloorCatalog();
