@@ -2,12 +2,10 @@
    featured book on /links. The homepage shop and the bio page both
    read this list. Author pages repeat the same /dp/ links.
 
-   REVER is in review at KDP and has no ASIN yet. Paste each ASIN
-   on its own line below when Amazon assigns it. Leave a pair of
-   quotes empty until then: the button says "Coming soon to Amazon"
-   and opens a search, never a broken /dp/ link. */
-var REVER_KINDLE_ASIN = "";
-var REVER_PAPER_ASIN = "";
+   REVER's ASINs (live on KDP Oct 31 2026). An empty pair of quotes
+   shows "Coming soon to Amazon" instead of a /dp/ link. */
+var REVER_KINDLE_ASIN = "B0HPYKK25S";
+var REVER_PAPER_ASIN = "B0HPYT615D";
 
 var CATALOG = {
   featured: "try-the-spirits",
