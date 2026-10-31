@@ -2,7 +2,7 @@
 
 The live site already points `SIGNUP_ENDPOINT` in `signup-config.js` at the deployed web app. Use these steps to replace that deployment. An empty `SIGNUP_ENDPOINT` makes the form say signups are opening soon and sends nothing.
 
-You need a Google account that should own the list. The sheet stays private. Only the web app URL is public, and it can only add or unsubscribe an address.
+You need a Google account that should own the list. The sheet stays private. The web app URL is public: anyone can add an address or unsubscribe with a token. Reading the list requires the `ADMIN_KEY` script property.
 
 ## 1. Make the sheet
 
@@ -26,6 +26,31 @@ Do this before the first real signup. Tokens are minted with this secret. If you
    - Property: `UNSUB_SECRET`
    - Value: a long random string (at least 16 characters). A password manager can generate one.
 3. Save.
+
+## 3b. Set the list key
+
+The newsletter sender reads the list with this key. It is not the unsubscribe secret, and it must never go in the website or in git.
+
+1. In the same **Script properties** list, add:
+   - Property: `ADMIN_KEY`
+   - Value: a different long random string, at least 16 characters.
+2. Save.
+
+If `ADMIN_KEY` is missing or shorter than 16 characters, a list request is refused. A wrong key is refused the same way: `{"ok":false,"error":"unauthorized"}`. That answer does not say whether the key was missing, short, or wrong, and it does not include any addresses.
+
+To read the list, once a new version is deployed:
+
+```
+GET https://script.google.com/macros/s/DEPLOYMENT_ID/exec?action=list&key=YOUR_ADMIN_KEY
+```
+
+A match returns only rows whose status is `subscribed` and whose consent is `yes`:
+
+```json
+{"ok":true,"subscribers":[{"email":"reader@example.com","name":"Ada","token":"t..."}]}
+```
+
+Each `token` is the unsubscribe token for that address. Put it on the end of `https://fifthfloorpressbooks.com/unsubscribe.html?token=`.
 
 ## 4. Deploy the web app
 
@@ -78,7 +103,7 @@ var SIGNUP_ENDPOINT = "https://script.google.com/macros/s/XXXXXXXX/exec";
 
 `company` is a honeypot. If it is filled in, the script answers success and writes nothing.
 
-A normal success response is `{"ok":true}`. A repeat address is `{"ok":true,"duplicate":true}`. Unsubscribe is a `GET` with `?token=` and answers `{"ok":true,"status":"unsubscribed"}` or `"already"`.
+A normal success response is `{"ok":true}`. A repeat address is `{"ok":true,"duplicate":true}`. Unsubscribe is a `GET` with `?token=` and answers `{"ok":true,"status":"unsubscribed"}` or `"already"`. A `GET` with no parameters answers `{"ok":true,"service":"fifth-floor-press-signups"}`. A `GET` with `action=list` answers the subscriber array above, or `{"ok":false,"error":"unauthorized"}`.
 
 ## If the row appears but the page says it could not save
 

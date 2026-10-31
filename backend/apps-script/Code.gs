@@ -6,6 +6,8 @@
  * doPost appends timestamp, email, name, source page, consent, an
  * unsubscribe token, and status. It dedupes on email.
  * doGet with ?token= marks that row unsubscribed.
+ * doGet with ?action=list&key= reads subscribed rows when key matches
+ * the ADMIN_KEY script property. A wrong or missing key is refused.
  *
  * Deploy the web app as: Execute as Me, Who has access: Anyone.
  * The site posts text/plain JSON so the browser skips a CORS preflight.
@@ -29,6 +31,9 @@ function doPost(e) {
 function doGet(e) {
   try {
     var params = (e && e.parameter) ? e.parameter : {};
+    if (params.action === "list") {
+      return json_(listSubscribers_(params.key));
+    }
     var token = params.token ? String(params.token) : "";
     if (!token) {
       return json_({ ok: true, service: "fifth-floor-press-signups" });
@@ -131,6 +136,59 @@ function secret_() {
   var s = PropertiesService.getScriptProperties().getProperty("UNSUB_SECRET");
   if (s && String(s).length >= 16) return String(s);
   return "REPLACE_WITH_SCRIPT_PROPERTY_UNSUB_SECRET";
+}
+
+function listSubscribers_(key) {
+  var expected = adminKey_();
+  var given = String(key == null ? "" : key);
+  /* A stand-in keeps the compare the same length when ADMIN_KEY is unset. */
+  var match = keyMatches_(given, expected || "________________");
+  if (!expected || !match) return { ok: false, error: "unauthorized" };
+
+  var sheet = sheet_();
+  var last = sheet.getLastRow();
+  var subscribers = [];
+  if (last < 2) return { ok: true, subscribers: subscribers };
+  var values = sheet.getRange(2, 1, last - 1, HEADERS.length).getValues();
+  for (var i = 0; i < values.length; i++) {
+    var row = values[i];
+    var email = unquote_(row[1]);
+    var name = unquote_(row[2]);
+    var consent = unquote_(row[4]).toLowerCase();
+    var token = unquote_(row[5]);
+    var status = unquote_(row[6]).toLowerCase();
+    if (status === "subscribed" && consent === "yes" && email) {
+      subscribers.push({ email: email, name: name, token: token });
+    }
+  }
+  return { ok: true, subscribers: subscribers };
+}
+
+function adminKey_() {
+  var s = PropertiesService.getScriptProperties().getProperty("ADMIN_KEY");
+  if (!s || String(s).length < 16) return "";
+  return String(s);
+}
+
+/* Walks a fixed window so a mismatch does not return on the first bad character. */
+function keyMatches_(given, expected) {
+  var a = String(given || "");
+  var b = String(expected || "");
+  var window = 256;
+  var diff = a.length === b.length ? 0 : 1;
+  if (a.length > window || b.length > window) diff = 1;
+  for (var i = 0; i < window; i++) {
+    var ca = i < a.length ? a.charCodeAt(i) : 0;
+    var cb = i < b.length ? b.charCodeAt(i) : 0;
+    diff |= (ca ^ cb);
+  }
+  return diff === 0;
+}
+
+function unquote_(value) {
+  var s = String(value == null ? "" : value).replace(/^\s+|\s+$/g, "");
+  if (s.charAt(0) === "'") s = s.substring(1);
+  return s;
 }
 
 function tokenFor_(email) {
