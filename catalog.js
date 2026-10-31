@@ -1,12 +1,21 @@
 /* Books for sale. Edit this file to change an Amazon link or the
    featured book on /links. The homepage shop and the bio page both
-   read this list. Author pages repeat the same /dp/ links. */
+   read this list. Author pages repeat the same /dp/ links.
+
+   REVER is in review at KDP and has no ASIN yet. Paste each ASIN
+   on its own line below when Amazon assigns it. Leave a pair of
+   quotes empty until then: the button says "Coming soon to Amazon"
+   and opens a search, never a broken /dp/ link. */
+var REVER_KINDLE_ASIN = "";
+var REVER_PAPER_ASIN = "";
+
 var CATALOG = {
   featured: "try-the-spirits",
   books: [
     { id: "triage", title: "Triage", author: "Owen Kessler, MD", page: "kessler.html#triage", kindle: "https://www.amazon.com/dp/B0HBRN3KB9", paper: "https://www.amazon.com/dp/B0HKGKGJFR", cover: "covers/triage.jpg", w: 167, h: 268 },
     { id: "golden-hour", title: "Golden Hour", author: "Owen Kessler, MD", page: "kessler.html#golden-hour", kindle: "https://www.amazon.com/dp/B0HJCZ1WHV", paper: "https://www.amazon.com/dp/B0HKGMJCSF", cover: "covers/golden-hour.jpg", w: 167, h: 268 },
     { id: "edema", title: "Edema", author: "Owen Kessler, MD", page: "kessler.html#edema", kindle: "https://www.amazon.com/dp/B0HK3446QH", paper: "https://www.amazon.com/dp/B0HKGKDRMG", cover: "covers/edema.jpg", w: 167, h: 268 },
+    { id: "rever", title: "REVER", author: "R. J. Marek", page: "marek.html#rever", kindleAsin: REVER_KINDLE_ASIN, paperAsin: REVER_PAPER_ASIN, blurb: "It was late, and Maden Fullmeyer dialed her own number backwards. A man answered. A thriller told from both ends of the line.", cover: "covers/rever.jpg", w: 600, h: 960 },
     { id: "resignation", title: "Resignation", author: "R. J. Marek", page: "marek.html#resignation", kindle: "https://www.amazon.com/dp/B0H3M3XQ45", paper: "https://www.amazon.com/dp/B0HMJRS5XF", cover: "covers/resignation.jpg", w: 167, h: 268 },
     { id: "koshaku", title: "Koshaku", author: "R. J. Marek", page: "marek.html#koshaku", kindle: "https://www.amazon.com/dp/B0HL5MXW6R", paper: "https://www.amazon.com/dp/B0HKH1K821", cover: "covers/koshaku.jpg", w: 167, h: 268 },
     { id: "candid", title: "Candid", author: "R. J. Marek", page: "marek.html#candid", kindle: "https://www.amazon.com/dp/B0HKH33C78", paper: "https://www.amazon.com/dp/B0HKH51Z2S", cover: "covers/candid.jpg", w: 167, h: 268 },
@@ -25,28 +34,59 @@ function renderFifthFloorCatalog() {
   if (shop) renderShop(shop);
   var grid = document.getElementById("bio-grid");
   if (grid) renderBioGrid(grid);
+  renderBuySlots();
   applyFeaturedBook();
+}
+
+function editionHref(book, which) {
+  var asinKey = which + "Asin";
+  if (book[asinKey] !== undefined) {
+    var asin = String(book[asinKey]).replace(/^\s+|\s+$/g, "");
+    if (!/^[A-Za-z0-9]{10}$/.test(asin)) return "";
+    return "https://www.amazon.com/dp/" + asin;
+  }
+  return book[which] || "";
+}
+
+function amazonSearch(book) {
+  return "https://www.amazon.com/s?k=" + encodeURIComponent(book.title + " " + book.author);
+}
+
+function findBook(id) {
+  for (var i = 0; i < CATALOG.books.length; i++) {
+    if (CATALOG.books[i].id === id) return CATALOG.books[i];
+  }
+  return null;
 }
 
 function renderShop(root) {
   var prefix = root.getAttribute("data-prefix") || "";
-  CATALOG.books.forEach(function (book) {
+  CATALOG.books.forEach(function (book, i) {
     var card = document.createElement("article");
     card.className = "shop-card";
-    var primary = book.kindle || book.paper;
+    var kindleHref = editionHref(book, "kindle");
+    var paperHref = editionHref(book, "paper");
+    var primary = kindleHref || paperHref || amazonSearch(book);
     var cover = document.createElement("a");
     cover.className = "shop-cover";
     cover.href = primary;
     cover.target = "_blank";
-    cover.rel = "noopener";
+    cover.rel = "noopener noreferrer";
     cover.setAttribute("aria-label", book.title + " by " + book.author + " on Amazon");
     var img = document.createElement("img");
     img.src = prefix + book.cover;
-    img.alt = book.title + " cover";
+    img.alt = "Cover of " + book.title + " by " + book.author;
     img.width = book.w;
     img.height = book.h;
+    img.loading = "lazy";
+    img.decoding = "async";
     cover.appendChild(img);
     card.appendChild(cover);
+    var mark = document.createElement("p");
+    mark.className = "file-no";
+    var num = i + 1;
+    mark.textContent = "V / " + (num < 10 ? "0" + num : String(num));
+    card.appendChild(mark);
     var h = document.createElement("h3");
     var titleLink = document.createElement("a");
     titleLink.href = book.page;
@@ -57,6 +97,12 @@ function renderShop(root) {
     meta.className = "meta";
     meta.textContent = book.author;
     card.appendChild(meta);
+    if (book.blurb) {
+      var blurb = document.createElement("p");
+      blurb.className = "blurb";
+      blurb.textContent = book.blurb;
+      card.appendChild(blurb);
+    }
     card.appendChild(buyBox(book));
     root.appendChild(card);
   });
@@ -65,9 +111,37 @@ function renderShop(root) {
 function buyBox(book) {
   var buy = document.createElement("div");
   buy.className = "buy";
-  if (book.paper) buy.appendChild(buyLink(book.paper, "buy-paper", "Buy Paperback", "Buy Paperback of " + book.title));
-  if (book.kindle) buy.appendChild(buyLink(book.kindle, "buy-kindle", "Buy on Kindle", "Buy " + book.title + " on Kindle"));
+  var paper = editionHref(book, "paper");
+  var kindle = editionHref(book, "kindle");
+  var tracksAsin = book.paperAsin !== undefined || book.kindleAsin !== undefined;
+  if (paper) buy.appendChild(buyLink(paper, "buy-paper", "Buy Paperback", "Buy Paperback of " + book.title));
+  else if (tracksAsin && book.paperAsin !== undefined && kindle) buy.appendChild(comingSoonLink(book, "Paperback coming soon"));
+  if (kindle) buy.appendChild(buyLink(kindle, "buy-kindle", "Buy on Kindle", "Buy " + book.title + " on Kindle"));
+  else if (tracksAsin && book.kindleAsin !== undefined && paper) buy.appendChild(comingSoonLink(book, "Kindle coming soon"));
+  if (!paper && !kindle && tracksAsin) buy.appendChild(comingSoonLink(book));
   return buy;
+}
+
+function comingSoonLink(book, label) {
+  var a = document.createElement("a");
+  a.className = "buy-link buy-soon";
+  a.href = amazonSearch(book);
+  a.target = "_blank";
+  a.rel = "noopener noreferrer";
+  a.textContent = label || "Coming soon to Amazon";
+  a.setAttribute("aria-label", book.title + " by " + book.author + " is coming soon to Amazon");
+  return a;
+}
+
+function renderBuySlots() {
+  var slots = document.querySelectorAll("[data-buy-for]");
+  for (var i = 0; i < slots.length; i++) {
+    var book = findBook(slots[i].getAttribute("data-buy-for"));
+    if (!book) continue;
+    var box = buyBox(book);
+    slots[i].innerHTML = "";
+    while (box.firstChild) slots[i].appendChild(box.firstChild);
+  }
 }
 
 function buyLink(href, cls, label, aria) {
@@ -75,7 +149,7 @@ function buyLink(href, cls, label, aria) {
   a.className = "buy-link " + cls;
   a.href = href;
   a.target = "_blank";
-  a.rel = "noopener";
+  a.rel = "noopener noreferrer";
   a.textContent = label;
   a.setAttribute("aria-label", aria);
   return a;
@@ -84,21 +158,27 @@ function buyLink(href, cls, label, aria) {
 function renderBioGrid(root) {
   var prefix = root.getAttribute("data-prefix") || "";
   CATALOG.books.forEach(function (book) {
-    var dest = book.kindle || book.paper;
+    var kindleHref = editionHref(book, "kindle");
+    var paperHref = editionHref(book, "paper");
+    var searchHref = amazonSearch(book);
+    var dest = kindleHref || paperHref || searchHref;
     var a = document.createElement("a");
     a.className = "tile";
     a.href = dest;
-    a.rel = "noopener";
+    a.rel = "noopener noreferrer";
     a.setAttribute("data-id", book.id);
     a.setAttribute("data-title", book.title);
     a.setAttribute("data-author", book.author);
-    a.setAttribute("data-kindle", dest);
-    a.setAttribute("data-paper", book.paper);
+    a.setAttribute("data-kindle", kindleHref);
+    a.setAttribute("data-paper", paperHref);
+    a.setAttribute("data-search", searchHref);
     var img = document.createElement("img");
     img.src = prefix + book.cover;
     img.alt = "";
     img.width = book.w;
     img.height = book.h;
+    img.loading = "lazy";
+    img.decoding = "async";
     a.appendChild(img);
     var title = document.createElement("span");
     title.className = "tile-title";
@@ -108,10 +188,16 @@ function renderBioGrid(root) {
     author.className = "tile-author";
     author.textContent = book.author;
     a.appendChild(author);
-    if (!book.kindle) {
+    if (book.blurb) {
+      var blurb = document.createElement("span");
+      blurb.className = "tile-blurb";
+      blurb.textContent = book.blurb;
+      a.appendChild(blurb);
+    }
+    if (!kindleHref) {
       var note = document.createElement("span");
       note.className = "tile-note";
-      note.textContent = "Paperback";
+      note.textContent = paperHref ? "Paperback" : "Coming soon";
       a.appendChild(note);
     }
     root.appendChild(a);
@@ -124,8 +210,9 @@ function applyFeaturedBook() {
   if (!tile) return;
   var title = tile.getAttribute("data-title");
   var author = tile.getAttribute("data-author");
-  var kindle = tile.getAttribute("data-kindle");
-  var paper = tile.getAttribute("data-paper");
+  var kindle = tile.getAttribute("data-kindle") || "";
+  var paper = tile.getAttribute("data-paper") || "";
+  var search = tile.getAttribute("data-search") || "";
   var img = tile.querySelector("img");
   var cover = document.getElementById("featured-cover");
   cover.src = img.getAttribute("src");
@@ -134,17 +221,21 @@ function applyFeaturedBook() {
   cover.alt = title + " cover";
   document.getElementById("featured-title").textContent = title;
   document.getElementById("featured-author").textContent = author;
-  var paperOnly = kindle === paper;
-  document.getElementById("featured-cover-link").href = paperOnly ? paper : kindle;
+  var paperOnly = !kindle && !!paper;
+  var pending = !kindle && !paper;
+  var coverLink = document.getElementById("featured-cover-link");
+  coverLink.href = kindle || paper || search;
+  coverLink.setAttribute("aria-label", title + " by " + author + " on Amazon");
   var kindleBtn = document.getElementById("featured-kindle");
-  kindleBtn.href = paperOnly ? paper : kindle;
-  kindleBtn.textContent = paperOnly ? "Paperback" : "Read on Kindle";
-  kindleBtn.setAttribute("aria-label", paperOnly ? ("Paperback of " + title) : ("Read " + title + " on Kindle"));
+  kindleBtn.href = pending ? search : (paperOnly ? paper : kindle);
+  kindleBtn.textContent = pending ? "Coming soon to Amazon" : (paperOnly ? "Buy Paperback" : "Buy on Kindle");
+  kindleBtn.setAttribute("aria-label", pending ? (title + " is coming soon on Amazon") : (paperOnly ? ("Buy Paperback of " + title) : ("Buy " + title + " on Kindle")));
   var paperBtn = document.getElementById("featured-paper");
-  paperBtn.href = paper;
-  if (paperOnly) paperBtn.setAttribute("hidden", "");
+  paperBtn.href = paper || search;
+  paperBtn.textContent = "Buy Paperback";
+  if (paperOnly || pending) paperBtn.setAttribute("hidden", "");
   else paperBtn.removeAttribute("hidden");
-  paperBtn.setAttribute("aria-label", "Paperback of " + title);
+  paperBtn.setAttribute("aria-label", "Buy Paperback of " + title);
 }
 
 renderFifthFloorCatalog();

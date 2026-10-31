@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#100e0c">
+<meta name="color-scheme" content="light">
 <title>Fifth Floor Press</title>
 <meta name="description" content="Fifth Floor Press is an independent publisher of fiction: medical drama, survival and techno-thrillers, literary suspense, and crime fiction.">
 <link rel="canonical" href="https://fifthfloorpressbooks.com/">
@@ -11,23 +13,45 @@
 <meta property="og:title" content="Fifth Floor Press">
 <meta property="og:description" content="Fifth Floor Press is an independent publisher of fiction: medical drama, survival and techno-thrillers, literary suspense, and crime fiction.">
 <meta property="og:url" content="https://fifthfloorpressbooks.com/">
-<meta property="og:image" content="https://fifthfloorpressbooks.com/brand/favicon-512.png">
-<meta property="og:image:alt" content="Fifth Floor Press">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://fifthfloorpressbooks.com/brand/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Fifth Floor Press, Floor V, unlisted">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Fifth Floor Press">
+<meta name="twitter:description" content="Fifth Floor Press is an independent publisher of fiction: medical drama, survival and techno-thrillers, literary suspense, and crime fiction.">
+<meta name="twitter:image" content="https://fifthfloorpressbooks.com/brand/og-card.png">
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="brand/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="brand/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="brand/favicon-192.png">
 <link rel="apple-touch-icon" href="brand/apple-touch-icon.png">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Fifth Floor Press","url":"https://fifthfloorpressbooks.com/","logo":"https://fifthfloorpressbooks.com/brand/favicon-512.png","email":"info@fifthfloorpressbooks.com","telephone":"+18309996525","sameAs":["https://www.instagram.com/fifthfloorpress/","https://www.tiktok.com/@fifth.floor.press"],"address":{"@type":"PostalAddress","streetAddress":"5900 Balcones Drive, Ste 100","addressLocality":"Austin","addressRegion":"TX","postalCode":"78731","addressCountry":"US"}}
+</script>
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
-<header>
-  <img src="brand/header-mark.png" alt="" class="brand-mark" width="64" height="64">
-  <p class="imprint">Fifth Floor Press</p>
-  <p class="tagline">Independent fiction, deliberately made</p>
-  <nav aria-label="Primary">
-    <a href="index.html" class="active">Home</a>
+<header class="mast">
+  <div class="mast-top">
+    <a class="brand" href="index.html">
+      <img src="brand/header-mark.png" alt="" width="44" height="44">
+      <span class="brand-text">
+        <span class="brand-name">Fifth Floor Press</span>
+        <span class="brand-floor">Floor V · Unlisted</span>
+      </span>
+    </a>
+    <ol class="shaft" aria-hidden="true">
+      <li>I</li>
+      <li>II</li>
+      <li>III</li>
+      <li>IV</li>
+      <li class="lit">V</li>
+    </ol>
+  </div>
+  <div class="nav-wrap">
+  <nav class="floor-nav" aria-label="Primary">
+    <a href="index.html" class="active" aria-current="page">Home</a>
     <a href="books.html">Books</a>
     <a href="index.html#featured" data-free-nav>Free on Kindle</a>
     <a href="kessler.html">Owen Kessler</a>
@@ -36,44 +60,30 @@
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
   </nav>
+  </div>
 </header>
 
 <main id="content">
-  <section class="promo" id="featured" aria-label="Featured book">
-    <div id="promo-free">
-      <div class="promo-layout">
-        <img class="book-cover" src="covers/koshaku.jpg" alt="Koshaku cover" width="167" height="268">
+  <div class="hero-bleed">
+    <section class="hero" id="featured" aria-label="Featured book">
+      <div class="hero-layout">
+        <img decoding="async" class="book-cover" src="covers/koshaku.jpg" alt="Cover of Koshaku by R. J. Marek" width="167" height="268" fetchpriority="high">
         <div>
-          <p class="promo-kicker">Free on Kindle</p>
-          <h1>Koshaku by R. J. Marek is free on Amazon, November 1 to 5</h1>
+          <p class="promo-kicker" id="promo-kicker">Free on Kindle</p>
+          <h1 id="promo-title">Koshaku by R. J. Marek is free on Amazon, November 1 to 5</h1>
           <p class="hook">He drives down from Bandera on a Tuesday to look at a dog nobody else wants.</p>
           <div class="buy">
-            <a class="buy-link buy-paper" href="https://www.amazon.com/dp/B0HKH1K821" target="_blank" rel="noopener" aria-label="Buy Paperback of Koshaku">Buy Paperback</a>
-            <a class="buy-link buy-kindle" href="https://www.amazon.com/dp/B0HL5MXW6R" target="_blank" rel="noopener" aria-label="Buy Koshaku on Kindle">Buy on Kindle</a>
+            <a class="buy-link buy-paper" href="https://www.amazon.com/dp/B0HKH1K821" target="_blank" rel="noopener noreferrer" aria-label="Buy Paperback of Koshaku">Buy Paperback</a>
+            <a class="buy-link buy-kindle" href="https://www.amazon.com/dp/B0HL5MXW6R" target="_blank" rel="noopener noreferrer" aria-label="Buy Koshaku on Kindle">Buy on Kindle</a>
           </div>
           <p class="shelf">Own it in print: keep it on your shelf, lend it, or give it as a gift.</p>
         </div>
       </div>
-    </div>
-    <div id="promo-now" hidden>
-      <div class="promo-layout">
-        <img class="book-cover" src="covers/koshaku.jpg" alt="Koshaku cover" width="167" height="268">
-        <div>
-          <p class="promo-kicker">Now on Amazon</p>
-          <h1>Koshaku by R. J. Marek</h1>
-          <p class="hook">He drives down from Bandera on a Tuesday to look at a dog nobody else wants.</p>
-          <div class="buy">
-            <a class="buy-link buy-paper" href="https://www.amazon.com/dp/B0HKH1K821" target="_blank" rel="noopener" aria-label="Buy Paperback of Koshaku">Buy Paperback</a>
-            <a class="buy-link buy-kindle" href="https://www.amazon.com/dp/B0HL5MXW6R" target="_blank" rel="noopener" aria-label="Buy Koshaku on Kindle">Buy on Kindle</a>
-          </div>
-          <p class="shelf">Own it in print: keep it on your shelf, lend it, or give it as a gift.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
   <h2 class="plain">A small press for character-driven fiction</h2>
-  <p class="lede">Fifth Floor Press publishes character-driven fiction across genres &mdash; medical drama, survival and techno-thriller, literary suspense, and crime. We work with a small roster of authors and put care into every title we put out, from the first draft to the finished page.</p>
+  <p class="lede">Fifth Floor Press publishes character-driven fiction across genres &mdash; medical drama, survival and techno-thriller, literary suspense, and crime. A small roster, and care from the first draft to the finished page. The V on the door is the Roman five. This floor is not on the directory.</p>
 
   <h2 id="shop-heading">Shop the books</h2>
   <p>Tap a cover or a button. Each one opens that book on Amazon.</p>
@@ -83,7 +93,7 @@
   <h2>Liked <em>Koshaku</em>? Read this next</h2>
   <p>Three more novels by R. J. Marek, already out in paperback and on Kindle.</p>
     <article class="book" id="candid">
-      <img class="book-cover" src="covers/candid.jpg" alt="Candid cover" width="167" height="268">
+      <img loading="lazy" decoding="async" class="book-cover" src="covers/candid.jpg" alt="Candid cover" width="167" height="268">
       <div class="book-body">
         <h3><a href="marek.html#candid">Candid</a></h3>
         <p class="meta">A novel</p>
@@ -96,7 +106,7 @@
       </div>
     </article>
     <article class="book" id="resignation">
-      <img class="book-cover" src="covers/resignation.jpg" alt="Resignation cover" width="167" height="268">
+      <img loading="lazy" decoding="async" class="book-cover" src="covers/resignation.jpg" alt="Resignation cover" width="167" height="268">
       <div class="book-body">
         <h3><a href="marek.html#resignation">Resignation</a></h3>
         <p class="meta">A novel</p>
@@ -109,7 +119,7 @@
       </div>
     </article>
     <article class="book" id="last-chair">
-      <img class="book-cover" src="covers/last-chair.jpg" alt="Last Chair cover" width="240" height="384">
+      <img loading="lazy" decoding="async" class="book-cover" src="covers/last-chair.jpg" alt="Last Chair cover" width="240" height="384">
       <div class="book-body">
         <h3><a href="marek.html#last-chair">Last Chair</a></h3>
         <p class="meta">Pioneer Mountain, Book One</p>
@@ -123,64 +133,77 @@
     </article>
 
   <h2>Our Authors</h2>
-
+  <div class="authors">
   <a class="author-card" href="kessler.html">
+    <p class="file-no">V / Kessler</p>
     <h3>Owen Kessler, MD</h3>
     <p class="voice">Medical fiction grounded in clinical reality.</p>
     <p>Author of the Triage Quartet.</p>
   </a>
 
   <a class="author-card" href="marek.html">
+    <p class="file-no">V / Marek</p>
     <h3>R. J. Marek</h3>
     <p class="voice">Novels about systems and the people inside them.</p>
-    <p>The Pioneer Mountain, Rally Point and Voice Register series, the Gil Prentice novels, and standalone fiction including <em>Candid</em>, <em>Koshaku</em> and <em>Resignation</em>.</p>
+    <p>The Pioneer Mountain, Rally Point and Voice Register series, the Gil Prentice novels, and standalone fiction including <em>REVER</em>, <em>Candid</em>, <em>Koshaku</em> and <em>Resignation</em>.</p>
   </a>
 
   <a class="author-card" href="dare.html">
+    <p class="file-no">V / Dare</p>
     <h3>Claire Dare</h3>
     <p class="voice">Crime fiction from the autopsy suite.</p>
     <p>Author of the Nora Bishop novels.</p>
   </a>
-
-  <section class="signup" aria-labelledby="list-heading">
-    <h2 id="list-heading">Hear when a book is free</h2>
-    <p>Send your email to Fifth Floor Press for a short note when a title is free on Amazon.</p>
-    <!--
-      TODO (owner): This form is not connected to a mailing-list service.
-      The action is a mailto placeholder. A visitor's email app opens a
-      message to info@fifthfloorpressbooks.com. No address is stored.
-
-      To collect a real list, replace this form with the embed your
-      provider gives you (action, method, and field names) — for example
-      Mailchimp, Buttondown, or ConvertKit. Then delete this comment and
-      the "mailing list is not connected" sentence below.
-    -->
-    <form action="mailto:info@fifthfloorpressbooks.com?subject=Free%20book%20note" method="post" enctype="text/plain">
-      <div class="field">
-        <label for="list-email">Email</label>
-        <input id="list-email" name="email" type="email" required autocomplete="email" inputmode="email">
-      </div>
-      <button type="submit">Email the press</button>
-    </form>
-    <p class="form-note">Until a mailing list is connected, this opens an email to info@fifthfloorpressbooks.com.</p>
-  </section>
+  </div>
 
   <h2>Rights &amp; Inquiries</h2>
   <p>For foreign rights, library and bulk orders, or media inquiries, see our <a href="contact.html">contact page</a>.</p>
+
+<section class="signup" id="list" aria-labelledby="list-heading">
+    <p class="eyebrow">The list</p>
+    <h2 id="list-heading">Hear when a book is free</h2>
+    <p>A short weekly note from the press: a free Kindle day, a new book, nothing else.</p>
+    <form class="signup-form" method="post" action="#list" novalidate>
+      <div class="hp" aria-hidden="true">
+        <label for="signup-company">Company</label>
+        <input id="signup-company" name="company" type="text" tabindex="-1" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="signup-email">Email</label>
+        <input id="signup-email" name="email" type="email" required autocomplete="email" inputmode="email" maxlength="200" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="signup-name">First name <span class="optional">(optional)</span></label>
+        <input id="signup-name" name="name" type="text" autocomplete="given-name" maxlength="80">
+      </div>
+      <label class="consent">
+        <input name="consent" type="checkbox" value="yes" required>
+        <span>Send me the weekly Fifth Floor Press note. I agree to the <a href="privacy.html">privacy note</a> and I can unsubscribe any time.</span>
+      </label>
+      <button type="submit">Join the list</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+    <noscript><p class="form-note">Email <a href="mailto:info@fifthfloorpressbooks.com">info@fifthfloorpressbooks.com</a> to join. The form needs JavaScript.</p></noscript>
+  </section>
 
 </main>
 
 <footer>
   <nav aria-label="Footer">
-    <a href="https://www.instagram.com/fifthfloorpress/" target="_blank" rel="noopener">Instagram @fifthfloorpress</a>
+    <a href="https://www.instagram.com/fifthfloorpress/" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://www.tiktok.com/@fifth.floor.press" target="_blank" rel="noopener noreferrer">TikTok</a>
     <a href="books.html">Books</a>
     <a href="links/">Links</a>
+    <a href="index.html#list">The list</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
   </nav>
   <p>&copy; 2026 Fifth Floor Press LLC. All rights reserved.</p>
 </footer>
 <script src="promo.js"></script>
 <script src="catalog.js"></script>
+<script src="signup-config.js"></script>
+<script src="signup.js"></script>
 </body>
 </html>

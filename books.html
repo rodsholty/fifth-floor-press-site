@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#100e0c">
+<meta name="color-scheme" content="light">
 <title>Books &mdash; Fifth Floor Press</title>
 <meta name="description" content="Paperbacks and Kindle editions from Fifth Floor Press: Owen Kessler, R. J. Marek, and Claire Dare.">
 <link rel="canonical" href="https://fifthfloorpressbooks.com/books.html">
@@ -11,9 +13,14 @@
 <meta property="og:title" content="Books &mdash; Fifth Floor Press">
 <meta property="og:description" content="Paperbacks and Kindle editions from Fifth Floor Press: Owen Kessler, R. J. Marek, and Claire Dare.">
 <meta property="og:url" content="https://fifthfloorpressbooks.com/books.html">
-<meta property="og:image" content="https://fifthfloorpressbooks.com/brand/favicon-512.png">
-<meta property="og:image:alt" content="Fifth Floor Press">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://fifthfloorpressbooks.com/brand/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Fifth Floor Press, Floor V, unlisted">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Books &mdash; Fifth Floor Press">
+<meta name="twitter:description" content="Paperbacks and Kindle editions from Fifth Floor Press: Owen Kessler, R. J. Marek, and Claire Dare.">
+<meta name="twitter:image" content="https://fifthfloorpressbooks.com/brand/og-card.png">
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="brand/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="brand/favicon-32.png">
@@ -22,13 +29,27 @@
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
-<header>
-  <img src="brand/header-mark.png" alt="" class="brand-mark" width="64" height="64">
-  <p class="imprint">Fifth Floor Press</p>
-  <p class="tagline">Independent fiction, deliberately made</p>
-  <nav aria-label="Primary">
+<header class="mast">
+  <div class="mast-top">
+    <a class="brand" href="index.html">
+      <img src="brand/header-mark.png" alt="" width="44" height="44">
+      <span class="brand-text">
+        <span class="brand-name">Fifth Floor Press</span>
+        <span class="brand-floor">Floor V · Unlisted</span>
+      </span>
+    </a>
+    <ol class="shaft" aria-hidden="true">
+      <li>I</li>
+      <li>II</li>
+      <li>III</li>
+      <li>IV</li>
+      <li class="lit">V</li>
+    </ol>
+  </div>
+  <div class="nav-wrap">
+  <nav class="floor-nav" aria-label="Primary">
     <a href="index.html">Home</a>
-    <a href="books.html" class="active">Books</a>
+    <a href="books.html" class="active" aria-current="page">Books</a>
     <a href="index.html#featured" data-free-nav>Free on Kindle</a>
     <a href="kessler.html">Owen Kessler</a>
     <a href="marek.html">R. J. Marek</a>
@@ -36,16 +57,18 @@
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
   </nav>
+  </div>
 </header>
 
 <main id="content">
+  <p class="eyebrow">Floor V · Unlisted</p>
   <h1>Books</h1>
-  <p class="lede">Every book on this page is out now. Buttons beside each cover open the paperback and, where it is published, the Kindle edition. <em>NATURAL</em> is paperback only for now.</p>
+  <p class="lede">Every book on this page is out now, except <em>REVER</em>, which is still in review at Amazon. Buttons beside each cover open the paperback and, where it is published, the Kindle edition. <em>NATURAL</em> is paperback only for now.</p>
   <p class="free-note" data-free-nav><a href="index.html#featured">Koshaku by R. J. Marek is free on Amazon, November 1 to 5.</a></p>
 
   <h2>Owen Kessler, MD</h2>
     <article class="book" id="triage">
-      <img class="book-cover" src="covers/triage.jpg" alt="Triage cover" width="167" height="268">
+      <img decoding="async" class="book-cover" src="covers/triage.jpg" alt="Triage cover" width="167" height="268">
       <div class="book-body">
         <h3><a href="kessler.html#triage">Triage</a></h3>
         <p class="meta">Triage Quartet, Book One</p>
@@ -59,7 +82,7 @@
       </div>
     </article>
     <article class="book" id="golden-hour">
-      <img class="book-cover" src="covers/golden-hour.jpg" alt="Golden Hour cover" width="167" height="268">
+      <img loading="lazy" decoding="async" class="book-cover" src="covers/golden-hour.jpg" alt="Golden Hour cover" width="167" height="268">
       <div class="book-body">
         <h3><a href="kessler.html#golden-hour">Golden Hour</a></h3>
         <p class="meta">Triage Quartet, Book Two</p>
@@ -73,7 +96,7 @@
       </div>
     </article>
     <article class="book" id="edema">
-      <img class="book-cover" src="covers/edema.jpg" alt="Edema cover" width="167" height="268">
+      <img loading="lazy" decoding="async" class="book-cover" src="covers/edema.jpg" alt="Edema cover" width="167" height="268">
       <div class="book-body">
         <h3><a href="kessler.html#edema">Edema</a></h3>
         <p class="meta">Triage Quartet, Book Three</p>
@@ -88,8 +111,24 @@
     </article>
 
   <h2>R. J. Marek</h2>
+    <article class="book" id="rever">
+      <img loading="lazy" decoding="async" class="book-cover" src="covers/rever.jpg" alt="REVER cover" width="600" height="960">
+      <div class="book-body">
+        <h3><a href="marek.html#rever">REVER</a></h3>
+        <p class="meta">A novel</p>
+        <div class="buy" data-buy-for="rever">
+          <noscript>
+            <a class="buy-link buy-soon" href="https://www.amazon.com/s?k=REVER%20R.%20J.%20Marek" target="_blank" rel="noopener" aria-label="REVER by R. J. Marek is coming soon to Amazon">Coming soon to Amazon</a>
+          </noscript>
+        </div>
+        <p class="hook">It was late, and Maden Fullmeyer dialed her own number backwards. A man answered.</p>
+        <p class="desc">She is a court reporter in Albuquerque. All day she takes down every word other people say, exactly as they say it. He is a respiratory therapist four hours south in El Paso, a patient, careful man who drives the empty interstates fixing the machines that help people breathe. His name is Gary. He is kind on the phone. He listens. He has a rule about women who call more than once.</p>
+        <p class="desc">She calls again.</p>
+        <p class="desc"><em>REVER</em> is told from both ends of the line: from inside the woman who dialed, and from inside the man who picked up and began, very slowly, to drive north. It is a thriller about attention, about patience, and about what a voice in the dark is willing to wait for.</p>
+      </div>
+    </article>
     <article class="book" id="resignation">
-      <img class="book-cover" src="covers/resignation.jpg" alt="Resignation cover" width="167" height="268">
+      <img loading="lazy" decoding="async" class="book-cover" src="covers/resignation.jpg" alt="Resignation cover" width="167" height="268">
       <div class="book-body">
         <h3><a href="marek.html#resignation">Resignation</a></h3>
         <p class="meta">A novel</p>
@@ -103,7 +142,7 @@
       </div>
     </article>
     <article class="book" id="koshaku">
-      <img class="book-cover" src="covers/koshaku.jpg" alt="Koshaku cover" width="167" height="268">
+      <img loading="lazy" decoding="async" class="book-cover" src="covers/koshaku.jpg" alt="Koshaku cover" width="167" height="268">
       <div class="book-body">
         <h3><a href="marek.html#koshaku">Koshaku</a></h3>
         <p class="meta">A novel</p>
@@ -117,7 +156,7 @@
       </div>
     </article>
     <article class="book" id="candid">
-      <img class="book-cover" src="covers/candid.jpg" alt="Candid cover" width="167" height="268">
+      <img loading="lazy" decoding="async" class="book-cover" src="covers/candid.jpg" alt="Candid cover" width="167" height="268">
       <div class="book-body">
         <h3><a href="marek.html#candid">Candid</a></h3>
         <p class="meta">A novel</p>
@@ -131,7 +170,7 @@
       </div>
     </article>
     <article class="book" id="try-the-spirits">
-      <img class="book-cover" src="covers/try-the-spirits.jpg" alt="Try the Spirits cover" width="167" height="268">
+      <img loading="lazy" decoding="async" class="book-cover" src="covers/try-the-spirits.jpg" alt="Try the Spirits cover" width="167" height="268">
       <div class="book-body">
         <h3><a href="marek.html#try-the-spirits">Try the Spirits</a></h3>
         <p class="meta">A novella</p>
@@ -145,7 +184,7 @@
       </div>
     </article>
     <article class="book" id="last-chair">
-      <img class="book-cover" src="covers/last-chair.jpg" alt="Last Chair cover" width="240" height="384">
+      <img loading="lazy" decoding="async" class="book-cover" src="covers/last-chair.jpg" alt="Last Chair cover" width="240" height="384">
       <div class="book-body">
         <h3><a href="marek.html#last-chair">Last Chair</a></h3>
         <p class="meta">Pioneer Mountain, Book One</p>
@@ -159,7 +198,7 @@
       </div>
     </article>
     <article class="book" id="the-scattering">
-      <img class="book-cover" src="covers/the-scattering.jpg" alt="The Scattering cover" width="167" height="268">
+      <img loading="lazy" decoding="async" class="book-cover" src="covers/the-scattering.jpg" alt="The Scattering cover" width="167" height="268">
       <div class="book-body">
         <h3><a href="marek.html#the-scattering">The Scattering</a></h3>
         <p class="meta">Rally Point, Book One</p>
@@ -173,7 +212,7 @@
       </div>
     </article>
     <article class="book" id="the-long-winter">
-      <img class="book-cover" src="covers/the-long-winter.jpg" alt="The Long Winter cover" width="167" height="268">
+      <img loading="lazy" decoding="async" class="book-cover" src="covers/the-long-winter.jpg" alt="The Long Winter cover" width="167" height="268">
       <div class="book-body">
         <h3><a href="marek.html#the-long-winter">The Long Winter</a></h3>
         <p class="meta">Rally Point, Book Two</p>
@@ -187,7 +226,7 @@
       </div>
     </article>
     <article class="book" id="eli">
-      <img class="book-cover" src="covers/eli.jpg" alt="Eli cover" width="168" height="252">
+      <img loading="lazy" decoding="async" class="book-cover" src="covers/eli.jpg" alt="Eli cover" width="168" height="252">
       <div class="book-body">
         <h3><a href="marek.html#eli">Eli</a></h3>
         <p class="meta">The Voice Register, Book One</p>
@@ -203,7 +242,7 @@
 
   <h2>Claire Dare</h2>
     <article class="book" id="settled">
-      <img class="book-cover" src="covers/settled.jpg" alt="Settled cover" width="167" height="268">
+      <img loading="lazy" decoding="async" class="book-cover" src="covers/settled.jpg" alt="Settled cover" width="167" height="268">
       <div class="book-body">
         <h3><a href="dare.html#settled">Settled</a></h3>
         <p class="meta">A Nora Bishop Novel, Book One</p>
@@ -217,7 +256,7 @@
       </div>
     </article>
     <article class="book" id="natural">
-      <img class="book-cover" src="covers/natural.jpg" alt="NATURAL cover" width="167" height="267">
+      <img loading="lazy" decoding="async" class="book-cover" src="covers/natural.jpg" alt="NATURAL cover" width="167" height="267">
       <div class="book-body">
         <h3><a href="dare.html#natural">NATURAL</a></h3>
         <p class="meta">A Nora Bishop Novel</p>
@@ -232,18 +271,51 @@
 
   <p>Titles still in production are listed under Coming soon on the author pages. They are not for sale yet.</p>
 
+<section class="signup" id="list" aria-labelledby="list-heading">
+    <p class="eyebrow">The list</p>
+    <h2 id="list-heading">Hear when a book is free</h2>
+    <p>A short weekly note from the press: a free Kindle day, a new book, nothing else.</p>
+    <form class="signup-form" method="post" action="#list" novalidate>
+      <div class="hp" aria-hidden="true">
+        <label for="signup-company">Company</label>
+        <input id="signup-company" name="company" type="text" tabindex="-1" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="signup-email">Email</label>
+        <input id="signup-email" name="email" type="email" required autocomplete="email" inputmode="email" maxlength="200" spellcheck="false">
+      </div>
+      <div class="field">
+        <label for="signup-name">First name <span class="optional">(optional)</span></label>
+        <input id="signup-name" name="name" type="text" autocomplete="given-name" maxlength="80">
+      </div>
+      <label class="consent">
+        <input name="consent" type="checkbox" value="yes" required>
+        <span>Send me the weekly Fifth Floor Press note. I agree to the <a href="privacy.html">privacy note</a> and I can unsubscribe any time.</span>
+      </label>
+      <button type="submit">Join the list</button>
+      <p class="form-status" role="status" aria-live="polite"></p>
+    </form>
+    <noscript><p class="form-note">Email <a href="mailto:info@fifthfloorpressbooks.com">info@fifthfloorpressbooks.com</a> to join. The form needs JavaScript.</p></noscript>
+  </section>
+
 </main>
 
 <footer>
   <nav aria-label="Footer">
-    <a href="https://www.instagram.com/fifthfloorpress/" target="_blank" rel="noopener">Instagram @fifthfloorpress</a>
+    <a href="https://www.instagram.com/fifthfloorpress/" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="https://www.tiktok.com/@fifth.floor.press" target="_blank" rel="noopener noreferrer">TikTok</a>
     <a href="books.html">Books</a>
     <a href="links/">Links</a>
+    <a href="index.html#list">The list</a>
     <a href="about.html">About</a>
     <a href="contact.html">Contact</a>
+    <a href="privacy.html">Privacy</a>
   </nav>
   <p>&copy; 2026 Fifth Floor Press LLC. All rights reserved.</p>
 </footer>
 <script src="promo.js"></script>
+<script src="catalog.js"></script>
+<script src="signup-config.js"></script>
+<script src="signup.js"></script>
 </body>
 </html>

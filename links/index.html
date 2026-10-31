@@ -7,142 +7,180 @@
 <meta name="color-scheme" content="dark">
 <title>Links — Fifth Floor Press</title>
 <meta name="description" content="Books from Fifth Floor Press. One tap from the bio link to a book on Amazon.">
+<link rel="canonical" href="https://fifthfloorpressbooks.com/links/">
+<meta property="og:site_name" content="Fifth Floor Press">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Links — Fifth Floor Press">
+<meta property="og:description" content="Books from Fifth Floor Press. One tap from the bio link to a book on Amazon.">
+<meta property="og:url" content="https://fifthfloorpressbooks.com/links/">
+<meta property="og:image" content="https://fifthfloorpressbooks.com/brand/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Fifth Floor Press, Floor V, unlisted">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Links — Fifth Floor Press">
+<meta name="twitter:description" content="Books from Fifth Floor Press. One tap from the bio link to a book on Amazon.">
+<meta name="twitter:image" content="https://fifthfloorpressbooks.com/brand/og-card.png">
 <link rel="icon" href="../brand/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="../brand/favicon-32.png">
 <link rel="apple-touch-icon" href="../brand/apple-touch-icon.png">
 <style>
   :root {
-    --ink: #f6f1ea;
-    --muted: #c9bfb4;
+    --ink: #f4f0e6;
+    --muted: #c9bfb2;
     --bg: #100e0c;
-    --panel: #1a1614;
-    --line: rgba(246, 241, 234, 0.14);
-    --accent: #7a2e2e;
-    --accent-dark: #5c2222;
+    --blush: #e7b8b4;
+    --signal: #7a2e2e;
+    --signal-dark: #5e2222;
   }
   * { box-sizing: border-box; }
   [hidden] { display: none !important; }
   body {
     margin: 0;
-    background: var(--bg);
+    background:
+      radial-gradient(500px 280px at 80% 0%, rgba(166, 132, 86, 0.18), transparent 60%),
+      var(--bg);
     color: var(--ink);
-    font-family: Georgia, "Times New Roman", serif;
+    font-family: "Iowan Old Style", Palatino, "Palatino Linotype", Georgia, serif;
     line-height: 1.45;
+    overflow-wrap: break-word;
   }
   .skip {
     position: absolute;
     left: 0.75rem;
     top: 0;
     transform: translateY(-150%);
-    background: var(--accent);
-    color: var(--ink);
+    background: var(--blush);
+    color: var(--bg);
     padding: 0.7rem 1rem;
     z-index: 5;
     text-decoration: none;
   }
   .skip:focus { transform: translateY(0.5rem); }
-  .wrap {
+  .car {
     max-width: 28rem;
     margin: 0 auto;
-    padding: 1.35rem 1.15rem calc(2rem + env(safe-area-inset-bottom));
+    padding: calc(1.15rem + env(safe-area-inset-top)) 1.15rem calc(1.8rem + env(safe-area-inset-bottom));
   }
-  .brand {
-    text-align: center;
-    margin-bottom: 1.35rem;
-  }
+  .brand { text-align: center; }
+  .brand a { display: inline-block; line-height: 0; }
   .brand img {
     width: 52px;
     height: 52px;
-    box-shadow: 0 0 0 1px rgba(246, 241, 234, 0.35);
+    box-shadow: 0 0 0 1px rgba(166, 132, 86, 0.55);
   }
-  .brand p {
+  .word {
     margin: 0.7rem 0 0;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    font-size: 0.82rem;
-    font-family: Arial, Helvetica, sans-serif;
+    font-size: 0.78rem;
+    font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
   }
-  .featured {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    padding: 1.2rem 1.05rem 1.15rem;
+  .shaft {
+    display: flex;
+    justify-content: center;
+    gap: 0.9rem;
+    list-style: none;
+    margin: 0.7rem 0 0;
+    padding: 0;
+    font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    color: rgba(244, 240, 230, 0.38);
+  }
+  .shaft .lit { color: var(--blush); }
+  .floor-line {
+    margin: 0.85rem 0 0;
+    text-align: center;
+    font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .free-strip {
+    margin: 1rem 0 0;
     text-align: center;
   }
+  .free-strip a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0.55rem 0.8rem;
+    color: var(--bg);
+    background: var(--blush);
+    text-decoration: none;
+    font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+  }
+  .featured { text-align: center; padding-top: 1.15rem; }
   .kicker {
     margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #f0d2d0;
+    color: var(--blush);
   }
   .featured-cover {
     display: block;
-    width: min(68vw, 240px);
-    margin: 0.9rem auto 0.85rem;
+    width: min(62vw, 200px);
+    margin: 0.85rem auto 0.8rem;
     line-height: 0;
   }
   .featured-cover img {
     width: 100%;
     height: auto;
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(166, 132, 86, 0.35);
   }
-  .featured h1 {
+  h1 {
     margin: 0;
-    font-size: 1.85rem;
+    font-size: 1.9rem;
     font-weight: normal;
     line-height: 1.15;
   }
-  .byline {
-    margin: 0.35rem 0 0;
-    font-style: italic;
-    color: var(--muted);
-  }
+  .byline { margin: 0.3rem 0 0; font-style: italic; color: var(--muted); }
   .btn {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
+    min-height: 52px;
     text-decoration: none;
-    font-family: Arial, Helvetica, sans-serif;
-    border-radius: 4px;
+    font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    border-radius: 2px;
   }
   .btn-kindle {
-    min-height: 56px;
     margin-top: 1rem;
-    background: var(--accent);
-    color: #faf8f4;
-    font-size: 1.15rem;
-    font-weight: 700;
+    background: var(--signal);
+    color: #f4f0e6;
+    font-size: 1.08rem;
   }
-  .btn-kindle:active { background: var(--accent-dark); }
+  .btn-kindle:active { background: var(--signal-dark); }
   .btn-paper {
-    min-height: 44px;
-    margin-top: 0.55rem;
+    min-height: 48px;
+    margin-top: 0.5rem;
     background: transparent;
     color: var(--ink);
-    border: 1px solid rgba(246, 241, 234, 0.45);
-    font-size: 0.95rem;
+    border: 1px solid rgba(244, 240, 230, 0.5);
+    font-size: 0.98rem;
   }
-  .btn-paper:active { background: rgba(246, 241, 234, 0.08); }
   .all {
-    margin: 1.6rem 0 0.85rem;
-    font-size: 1.15rem;
+    margin: 1.7rem 0 0.8rem;
+    font-size: 1.2rem;
     font-weight: normal;
-    letter-spacing: 0.04em;
   }
   .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.05rem 0.75rem;
   }
-  .tile {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-    min-width: 0;
-  }
+  .tile { display: block; color: inherit; text-decoration: none; min-width: 0; }
   .tile img {
     width: 100%;
     height: auto;
@@ -150,141 +188,183 @@
     box-shadow: 0 10px 22px rgba(0, 0, 0, 0.4);
     background: #2a2420;
   }
-  .tile-title {
-    display: block;
-    margin-top: 0.45rem;
-    font-size: 0.98rem;
-    line-height: 1.25;
-  }
+  .tile-title { display: block; margin-top: 0.45rem; font-size: 0.98rem; line-height: 1.25; }
   .tile-author {
     display: block;
     margin-top: 0.15rem;
     color: var(--muted);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 0.72rem;
-    letter-spacing: 0.03em;
   }
+  .tile-blurb { display: block; margin-top: 0.35rem; color: var(--muted); font-size: 0.78rem; line-height: 1.35; }
   .tile-note {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 44px;
     margin-top: 0.45rem;
-    border: 1px solid rgba(246, 241, 234, 0.45);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.85rem;
-    color: var(--ink);
-  }
-  .tile:active img { opacity: 0.86; }
-  .back, .signup {
-    margin-top: 1.75rem;
+    padding: 0.35rem 0.4rem;
+    border: 1px solid rgba(244, 240, 230, 0.45);
+    font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.82rem;
     text-align: center;
   }
-  .back a {
-    color: #f0d2d0;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.92rem;
+  .back, .social { margin: 1.4rem 0 0; text-align: center; }
+  .social {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.2rem 1.25rem;
+    font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .back a, .social a {
+    color: var(--blush);
+    font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
   }
   .signup {
+    margin-top: 1.8rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid rgba(244, 240, 230, 0.14);
     text-align: left;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--line);
   }
-  .signup h2 {
-    margin: 0 0 0.4rem;
-    font-size: 1.15rem;
-    font-weight: normal;
-    text-align: center;
+  .signup .eyebrow, .signup h2 { text-align: center; }
+  .eyebrow {
+    margin: 0;
+    font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--blush);
   }
-  .signup p { margin: 0.35rem 0; color: var(--muted); font-size: 0.95rem; }
+  .signup h2 { margin: 0.3rem 0 0.4rem; font-size: 1.25rem; font-weight: normal; }
+  .signup p { margin: 0.35rem 0; color: var(--muted); font-size: 0.98rem; }
   .signup label {
     display: block;
-    margin-top: 0.8rem;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    margin-top: 0.75rem;
+    font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+    font-size: 0.82rem;
     color: var(--muted);
   }
-  .signup input {
+  .signup input[type="email"],
+  .signup input[type="text"] {
     width: 100%;
     min-height: 48px;
     margin-top: 0.35rem;
     padding: 0.55rem 0.7rem;
     font: inherit;
     color: var(--ink);
-    background: #221e1b;
-    border: 1px solid #5c534c;
+    background: #1a1714;
+    border: 1px solid rgba(244, 240, 230, 0.28);
   }
+  .consent {
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+    margin-top: 0.85rem;
+    font-family: Georgia, serif;
+    font-size: 0.98rem;
+    color: var(--ink);
+  }
+  .consent input { width: 1.25rem; height: 1.25rem; margin-top: 0.15rem; flex: 0 0 auto; accent-color: var(--blush); }
+  .consent a { color: var(--blush); }
   .signup button {
     width: 100%;
     min-height: 48px;
-    margin-top: 0.65rem;
-    background: transparent;
-    color: var(--ink);
-    border: 1px solid rgba(246, 241, 234, 0.45);
-    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 0.85rem;
+    background: var(--ink);
+    color: var(--bg);
+    border: none;
+    font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
     font-size: 0.95rem;
+    font-weight: 700;
     cursor: pointer;
   }
-  .form-note { font-size: 0.85rem !important; }
-  a:focus-visible, button:focus-visible, input:focus-visible, .skip:focus {
-    outline: 3px solid #f6f1ea;
-    outline-offset: 3px;
+  .form-status {
+    margin: 0.85rem 0 0;
+    padding: 0.75rem 0.8rem;
+    border-left: 3px solid #a68456;
+    background: rgba(244, 240, 230, 0.06);
+    color: var(--ink);
   }
-  @media (min-width: 720px) {
-    .grid { grid-template-columns: 1fr 1fr 1fr; }
-    .wrap { max-width: 40rem; }
+  .form-status:empty { display: none; }
+  .form-status.is-error { border-left-color: var(--blush); }
+  .form-status.is-ok { border-left-color: #b7d3be; }
+  .hp { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important; }
+  a:focus-visible, button:focus-visible, input:focus-visible, .skip:focus {
+    outline: 3px solid #f4f0e6;
+    outline-offset: 3px;
   }
 </style>
 </head>
 <body>
 <a class="skip" href="#content">Skip to content</a>
-<!--
-  Featured book and every Amazon link live in ../catalog.js.
-  Change CATALOG.featured to switch the book at the top.
--->
-<div class="wrap">
+<div class="car">
   <header class="brand">
-    <img src="../brand/header-mark.png" alt="" width="52" height="52">
-    <p>Fifth Floor Press</p>
+    <a href="../index.html"><img src="../brand/header-mark.png" alt="" width="52" height="52"></a>
+    <p class="word">Fifth Floor Press</p>
+    <ol class="shaft" aria-hidden="true">
+      <li>I</li><li>II</li><li>III</li><li>IV</li><li class="lit">V</li>
+    </ol>
+    <p class="floor-line">Floor V · You have the floor</p>
   </header>
 
   <main id="content">
+    <p class="free-strip" data-free-nav><a href="https://www.amazon.com/dp/B0HL5MXW6R" rel="noopener noreferrer">Koshaku is free on Kindle, November 1–5</a></p>
+
     <section class="featured" id="featured" aria-label="Featured now">
       <p class="kicker">Featured now</p>
-      <a class="featured-cover" id="featured-cover-link" href="https://www.amazon.com/dp/B0HK1KGHK5" rel="noopener">
-        <img id="featured-cover" src="../covers/try-the-spirits.jpg" alt="Try the Spirits cover" width="167" height="268">
+      <a class="featured-cover" id="featured-cover-link" href="https://www.amazon.com/dp/B0HK1KGHK5" rel="noopener noreferrer">
+        <img id="featured-cover" src="../covers/try-the-spirits.jpg" alt="Cover of Try the Spirits by R. J. Marek" width="167" height="268">
       </a>
       <h1 id="featured-title">Try the Spirits</h1>
       <p class="byline" id="featured-author">R. J. Marek</p>
-      <a class="btn btn-kindle" id="featured-kindle" href="https://www.amazon.com/dp/B0HK1KGHK5" rel="noopener">Read on Kindle</a>
-      <a class="btn btn-paper" id="featured-paper" href="https://www.amazon.com/dp/B0HK21F5SR" rel="noopener">Paperback</a>
+      <a class="btn btn-kindle" id="featured-kindle" href="https://www.amazon.com/dp/B0HK1KGHK5" rel="noopener noreferrer" aria-label="Buy Try the Spirits on Kindle">Buy on Kindle</a>
+      <a class="btn btn-paper" id="featured-paper" href="https://www.amazon.com/dp/B0HK21F5SR" rel="noopener noreferrer" aria-label="Buy Paperback of Try the Spirits">Buy Paperback</a>
     </section>
 
-    <h2 class="all">All books</h2>
+    <h2 class="all">The shelf</h2>
     <div class="grid" id="bio-grid" data-prefix="../"></div>
 
-    <p class="back"><a href="../index.html">Visit the press site</a></p>
-
-    <section class="signup" aria-labelledby="list-heading">
+    <section class="signup" id="list" aria-labelledby="list-heading">
+      <p class="eyebrow">The list</p>
       <h2 id="list-heading">Hear when a book is free</h2>
-      <p>Send your email to Fifth Floor Press for a short note when a title is free on Amazon.</p>
-      <!--
-        TODO (owner): This form is not connected to a mailing-list service.
-        It opens an email to info@fifthfloorpressbooks.com. To collect a list,
-        replace the form with the embed your provider gives you, then remove
-        this comment and the sentence under the button.
-      -->
-      <form action="mailto:info@fifthfloorpressbooks.com?subject=Free%20book%20note" method="post" enctype="text/plain">
-        <label for="list-email">Email</label>
-        <input id="list-email" name="email" type="email" required autocomplete="email" inputmode="email">
-        <button type="submit">Email the press</button>
+      <p>A short weekly note from the press: a free Kindle day, a new book, nothing else.</p>
+      <form class="signup-form" method="post" action="#list" novalidate>
+        <div class="hp" aria-hidden="true">
+          <label for="signup-company">Company</label>
+          <input id="signup-company" name="company" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="signup-email">Email</label>
+          <input id="signup-email" name="email" type="email" required autocomplete="email" inputmode="email" maxlength="200" spellcheck="false">
+        </div>
+        <div class="field">
+          <label for="signup-name">First name <span class="optional">(optional)</span></label>
+          <input id="signup-name" name="name" type="text" autocomplete="given-name" maxlength="80">
+        </div>
+        <label class="consent">
+          <input name="consent" type="checkbox" value="yes" required>
+          <span>Send me the weekly Fifth Floor Press note. I agree to the <a href="../privacy.html">privacy note</a> and I can unsubscribe any time.</span>
+        </label>
+        <button type="submit">Join the list</button>
+        <p class="form-status" role="status" aria-live="polite"></p>
       </form>
-      <p class="form-note">Until a mailing list is connected, this opens an email to info@fifthfloorpressbooks.com.</p>
+      <noscript><p>Email <a href="mailto:info@fifthfloorpressbooks.com">info@fifthfloorpressbooks.com</a> to join. The form needs JavaScript.</p></noscript>
     </section>
+
+    <p class="social">
+      <a href="https://www.instagram.com/fifthfloorpress/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://www.tiktok.com/@fifth.floor.press" target="_blank" rel="noopener noreferrer">TikTok</a>
+    </p>
+    <p class="back"><a href="../index.html">Enter the reading room</a></p>
   </main>
 </div>
+<script src="../promo.js"></script>
+<script src="../signup-config.js"></script>
+<script src="../signup.js"></script>
 <script src="../catalog.js"></script>
 </body>
 </html>
