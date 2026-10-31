@@ -50,7 +50,7 @@ Nothing in the product graph was a dead link. The failure was the form, and the 
 
 *REVER* has no ASIN yet. The button goes to an Amazon search for `REVER R. J. Marek`, not a dead `/dp/` link. That search URL returns a normal results page.
 
-**Other external.** `mailto:info@fifthfloorpressbooks.com` and `tel:+18309996525` are real contact links, not the signup. Instagram `https://www.instagram.com/fifthfloorpress/` could not be confirmed from this network: Instagram answered with a login wall, then a rate limit. A different publisher already uses `fifthfloorpress.com` (no “books”). The handle is the one the site already published. The owner should confirm it is theirs.
+**Other external.** `mailto:info@fifthfloorpressbooks.com` and `tel:+18309996525` are real contact links, not the signup. The owner confirmed Instagram `https://www.instagram.com/fifthfloorpress/` is this press. TikTok is `https://www.tiktok.com/@fifth.floor.press`, added in the footer and on `/links`. A different publisher uses `fifthfloorpress.com` (no “books”); that domain is not linked.
 
 **Broken links fixed:** none. There were no 404s to repair. The signup `mailto` was replaced because it did not collect addresses, not because the address was wrong.
 
@@ -123,5 +123,6 @@ It is now a real form: email, optional first name, a required consent checkbox f
 - Paste *REVER* Kindle and paperback ASINs into `REVER_KINDLE_ASIN` and `REVER_PAPER_ASIN` in `catalog.js` when KDP assigns them.
 - A Kindle ASIN for *NATURAL*, if that edition is coming. The paperback link is live.
 - Higher-resolution covers (around 800px wide) if the shelf should look sharp on large monitors.
-- Confirm `instagram.com/fifthfloorpress` is this press, and send a TikTok URL if that profile should be linked. None was on the site, so none was invented.
 - After 5 November 2026 the free-book banner turns itself off for anyone with JavaScript. The no-JavaScript homepage still shows the free wording, because that was the static default. Edit the homepage `h1` when the sale is over if that matters.
+
+The owner confirmed Instagram `@fifthfloorpress` and supplied TikTok `@fifth.floor.press`. Both are linked from every footer and from `/links`.

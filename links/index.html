@@ -209,8 +209,21 @@
     font-size: 0.82rem;
     text-align: center;
   }
-  .back { margin: 1.6rem 0 0; text-align: center; }
-  .back a { color: var(--blush); font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif; }
+  .back, .social { margin: 1.4rem 0 0; text-align: center; }
+  .social {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.2rem 1.25rem;
+    font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  .back a, .social a {
+    color: var(--blush);
+    font-family: "Avenir Next", "Segoe UI", Helvetica, Arial, sans-serif;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
   .signup {
     margin-top: 1.8rem;
     padding-top: 1.2rem;
@@ -342,6 +355,10 @@
       <noscript><p>Email <a href="mailto:info@fifthfloorpressbooks.com">info@fifthfloorpressbooks.com</a> to join. The form needs JavaScript.</p></noscript>
     </section>
 
+    <p class="social">
+      <a href="https://www.instagram.com/fifthfloorpress/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="https://www.tiktok.com/@fifth.floor.press" target="_blank" rel="noopener noreferrer">TikTok</a>
+    </p>
     <p class="back"><a href="../index.html">Enter the reading room</a></p>
   </main>
 </div>
