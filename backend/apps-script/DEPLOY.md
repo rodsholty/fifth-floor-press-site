@@ -108,3 +108,16 @@ A normal success response is `{"ok":true}`. A repeat address is `{"ok":true,"dup
 ## If the row appears but the page says it could not save
 
 The script ran, and a browser blocked reading the redirect from `script.google.com` to `script.googleusercontent.com`. Confirm you deployed **Anyone** and that the URL in `signup-config.js` is the `/exec` URL from that deployment. Submit again from a normal browser window (not an in-app preview). The text/plain JSON body is what makes the response readable.
+
+## Redeploy for no-JavaScript signups (preview/scattering-launch)
+
+The site forms now post straight to the web app URL, so visitors with
+scripts off can join. `doPost` detects a form-encoded post (`format=form`)
+and returns a small page that sends the tab to `/thanks.html`; the
+JavaScript path still gets JSON.
+
+After merging, paste the new `Code.gs` into the Apps Script project, then
+Deploy > Manage deployments > edit the existing web app deployment >
+Version: New version > Deploy. Editing the existing deployment keeps the
+same `/exec` URL, so `signup-config.js` and the form `action` attributes
+do not change. Keep "Execute as: Me" and "Who has access: Anyone".
