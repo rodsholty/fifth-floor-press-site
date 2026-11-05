@@ -1,6 +1,6 @@
 /* Books for sale. Edit this file to change an Amazon link or the
-   featured book on /links. The homepage shop and the bio page both
-   read this list. Author pages repeat the same /dp/ links.
+   featured book on /links. The bio page (R. J. Marek only) reads this list
+   through booksFor(), filtered by author. Author pages repeat the same /dp/ links.
 
    REVER's ASINs (live on KDP Oct 31 2026). An empty pair of quotes
    shows "Coming soon to Amazon" instead of a /dp/ link. */
@@ -57,9 +57,17 @@ function findBook(id) {
   return null;
 }
 
+/* Pen names never share a grid. A grid renders only the books whose author
+   matches its data-author; a grid with no data-author renders nothing. */
+function booksFor(root) {
+  var author = root.getAttribute("data-author") || "";
+  if (!author) return [];
+  return CATALOG.books.filter(function (book) { return book.author === author; });
+}
+
 function renderShop(root) {
   var prefix = root.getAttribute("data-prefix") || "";
-  CATALOG.books.forEach(function (book, i) {
+  booksFor(root).forEach(function (book, i) {
     var card = document.createElement("article");
     card.className = "shop-card";
     var kindleHref = editionHref(book, "kindle");
@@ -155,7 +163,7 @@ function buyLink(href, cls, label, aria) {
 
 function renderBioGrid(root) {
   var prefix = root.getAttribute("data-prefix") || "";
-  CATALOG.books.forEach(function (book) {
+  booksFor(root).forEach(function (book) {
     var kindleHref = editionHref(book, "kindle");
     var paperHref = editionHref(book, "paper");
     var searchHref = amazonSearch(book);

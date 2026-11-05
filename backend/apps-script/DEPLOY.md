@@ -121,3 +121,16 @@ Deploy > Manage deployments > edit the existing web app deployment >
 Version: New version > Deploy. Editing the existing deployment keeps the
 same `/exec` URL, so `signup-config.js` and the form `action` attributes
 do not change. Keep "Execute as: Me" and "Who has access: Anyone".
+
+## Redeploy for separate author lists
+
+Each form now sends a hidden `list` field (`marek`, `kessler` or `dare`).
+`Code.gs` stores it in a new ninth column, `list`, dedupes on email + list,
+gives each row its own unsubscribe token, refuses a post with no valid list,
+and `?action=list` now needs `&list=marek|kessler|dare` (one author per export).
+Rows saved before this change have a blank `list`; the Principal should
+decide which author's list, if any, they belong to before anything is sent.
+
+Paste the new `Code.gs`, then Deploy > Manage deployments > edit the
+existing web app deployment > Version: New version > Deploy (same /exec URL).
+Until that redeploy, the live script ignores `list` and keeps one mixed sheet.
