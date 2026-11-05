@@ -1,8 +1,13 @@
-/* Posts the weekly-note form to SIGNUP_ENDPOINT (signup-config.js).
+/* Posts an author's list form to SIGNUP_ENDPOINT (signup-config.js).
    Blank endpoint: a clear "opening soon" message, no mailto, nothing stored. */
 (function () {
   var SOON = "Signups are opening soon. Until the list is connected, write to info@fifthfloorpressbooks.com and we will add you.";
   var SAVED = "You\u2019re on the list. Watch for a short note when a book is free.";
+  /* Each form carries a hidden list (marek, kessler or dare): one list per pen name. */
+  function listName(form) {
+    var input = form.querySelector("input[name='list']");
+    return input && input.value ? input.value : "";
+  }
   var DUPLICATE = "You\u2019re already on the list. We\u2019ll write when a book is free.";
   var NET = "We couldn\u2019t save that just now. Try again, or write to info@fifthfloorpressbooks.com.";
 
@@ -87,7 +92,7 @@
       }
       if (!consent) {
         if (consentInput) consentInput.focus();
-        setStatus(status, "error", "Please check the box to agree to the weekly note.");
+        setStatus(status, "error", "Please check the box to agree to the author\u2019s notes.");
         return;
       }
 
@@ -119,6 +124,7 @@
         name: name,
         consent: true,
         source: sourceTag(form),
+        list: listName(form),
         company: ""
       };
 
@@ -157,7 +163,7 @@
   var url = endpoint();
 
   if (!token) {
-    setStatus(unsub, "", "Open the unsubscribe link in the weekly note, or email info@fifthfloorpressbooks.com and we will remove you.");
+    setStatus(unsub, "", "Open the unsubscribe link in the author\u2019s note, or email info@fifthfloorpressbooks.com and we will remove you.");
     return;
   }
   if (!url) {
@@ -177,7 +183,7 @@
       if (data && data.ok && data.status === "already") {
         setStatus(unsub, "ok", "You\u2019re already off the list.");
       } else if (data && data.ok) {
-        setStatus(unsub, "ok", "You\u2019re off the list. You won\u2019t get the weekly note.");
+        setStatus(unsub, "ok", "You\u2019re off the list. You won\u2019t get that author\u2019s notes.");
       } else {
         setStatus(unsub, "error", "That link doesn\u2019t match anyone on the list. Email info@fifthfloorpressbooks.com and we will remove you.");
       }

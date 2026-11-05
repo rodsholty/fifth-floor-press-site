@@ -236,7 +236,8 @@ h2 {
   border-bottom: 1px solid var(--line);
 }
 
-h2.plain {
+h2.plain,
+h1.plain {
   border-bottom: none;
   padding-bottom: 0;
   margin-top: 0.2rem;

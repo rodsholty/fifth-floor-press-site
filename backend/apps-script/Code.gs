@@ -16,7 +16,10 @@
 
 var SPREADSHEET_ID = "";
 var SHEET_NAME = "Signups";
-var HEADERS = ["timestamp", "email", "name", "source", "consent", "token", "status", "unsubscribed_at"];
+var HEADERS = ["timestamp", "email", "name", "source", "consent", "token", "status", "unsubscribed_at", "list"];
+/* One list per pen name. Pen names never share a list (charter rule 3.2).
+   Rows saved before the list column existed have a blank list. */
+var LISTS = { marek: "R. J. Marek", kessler: "Owen Kessler, MD", dare: "Claire Dare" };
 var TIMEZONE = "America/Chicago";
 
 var SITE_URL = "https://fifthfloorpressbooks.com";
@@ -49,7 +52,8 @@ function thanksPage_(result, params) {
   var source = String(params.source || "");
   var status = result.ok ? (result.duplicate ? "already" : "ok") : "error";
   var url = SITE_URL + "/thanks.html?status=" + status +
-    "&source=" + encodeURIComponent(source.slice(0, 120));
+    "&source=" + encodeURIComponent(source.slice(0, 120)) +
+    "&list=" + encodeURIComponent(String(result.list || params.list || "").slice(0, 20));
   var msg = result.ok
     ? (result.duplicate ? "You\u2019re already on the list." : "You\u2019re on the list. Thank you.")
     : (result.error || "We couldn\u2019t save that just now.");
@@ -75,7 +79,7 @@ function doGet(e) {
   try {
     var params = (e && e.parameter) ? e.parameter : {};
     if (params.action === "list") {
-      return json_(listSubscribers_(params.key));
+      return json_(listSubscribers_(params.key, params.list));
     }
     var token = params.token ? String(params.token) : "";
     if (!token) {
@@ -99,24 +103,26 @@ function handlePost_(e) {
     return { ok: false, error: "That email does not look valid." };
   }
   if (!consented_(data.consent)) {
-    return { ok: false, error: "Please agree to the weekly note." };
+    return { ok: false, error: "Please agree to get the author's notes." };
   }
+  var list = String(data.list || "").replace(/^\s+|\s+$/g, "").toLowerCase();
+  if (!LISTS.hasOwnProperty(list)) return { ok: false, error: "Please sign up from an author page." };
 
   var lock = LockService.getScriptLock();
   lock.waitLock(15000);
   try {
     var sheet = sheet_();
-    var token = tokenFor_(email);
-    var row = findEmail_(sheet, email);
+    var token = tokenFor_(email + "|" + list);
+    var row = findEmailList_(sheet, email, list);
     var stamp = Utilities.formatDate(new Date(), TIMEZONE, "yyyy-MM-dd HH:mm:ss");
-    var record = [stamp, safe_(email), safe_(name), safe_(source), "yes", token, "subscribed", ""];
+    var record = [stamp, safe_(email), safe_(name), safe_(source), "yes", token, "subscribed", "", list];
     if (row) {
       var status = String(sheet.getRange(row, 7).getValue() || "");
       sheet.getRange(row, 1, 1, HEADERS.length).setValues([record]);
-      return { ok: true, duplicate: status === "subscribed" };
+      return { ok: true, duplicate: status === "subscribed", list: list };
     }
     sheet.appendRow(record);
-    return { ok: true };
+    return { ok: true, list: list };
   } finally {
     lock.releaseLock();
   }
@@ -162,6 +168,9 @@ function sheet_() {
   if (sheet.getLastRow() === 0 || sheet.getRange(1, 1).getValue() === "") {
     sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
     sheet.setFrozenRows(1);
+  } else if (sheet.getRange(1, HEADERS.length).getValue() === "") {
+    /* Older sheets: add the list header in place; earlier rows stay blank. */
+    sheet.getRange(1, HEADERS.length).setValue(HEADERS[HEADERS.length - 1]);
   }
   return sheet;
 }
@@ -181,13 +190,17 @@ function secret_() {
   return "REPLACE_WITH_SCRIPT_PROPERTY_UNSUB_SECRET";
 }
 
-function listSubscribers_(key) {
+/* ?action=list&key=...&list=marek returns one author's list. A blank or
+   unknown list returns nothing, so lists are never exported mixed. */
+function listSubscribers_(key, listName) {
   var expected = adminKey_();
   var given = String(key == null ? "" : key);
   /* A stand-in keeps the compare the same length when ADMIN_KEY is unset. */
   var match = keyMatches_(given, expected || "________________");
   if (!expected || !match) return { ok: false, error: "unauthorized" };
 
+  var only = String(listName || "").toLowerCase();
+  if (!LISTS.hasOwnProperty(only)) return { ok: false, error: "Pass list=marek, kessler or dare." };
   var sheet = sheet_();
   var last = sheet.getLastRow();
   var subscribers = [];
@@ -200,11 +213,13 @@ function listSubscribers_(key) {
     var consent = unquote_(row[4]).toLowerCase();
     var token = unquote_(row[5]);
     var status = unquote_(row[6]).toLowerCase();
+    var rowList = unquote_(row[8]).toLowerCase();
+    if (rowList !== only) continue;
     if (status === "subscribed" && consent === "yes" && email) {
       subscribers.push({ email: email, name: name, token: token });
     }
   }
-  return { ok: true, subscribers: subscribers };
+  return { ok: true, list: only, subscribers: subscribers };
 }
 
 function adminKey_() {
@@ -242,6 +257,20 @@ function tokenFor_(email) {
 
 function findEmail_(sheet, email) {
   return find_(sheet, 2, email, true);
+}
+
+/* Same address on two authors' lists is two rows: dedupe on email + list. */
+function findEmailList_(sheet, email, list) {
+  var last = sheet.getLastRow();
+  if (last < 2) return 0;
+  var values = sheet.getRange(2, 1, last - 1, HEADERS.length).getValues();
+  var want = String(email).toLowerCase();
+  for (var i = 0; i < values.length; i++) {
+    var have = unquote_(values[i][1]).toLowerCase();
+    var haveList = unquote_(values[i][8]).toLowerCase();
+    if (have === want && haveList === list) return i + 2;
+  }
+  return 0;
 }
 
 function findToken_(sheet, token) {
