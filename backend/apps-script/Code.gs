@@ -19,13 +19,56 @@ var SHEET_NAME = "Signups";
 var HEADERS = ["timestamp", "email", "name", "source", "consent", "token", "status", "unsubscribed_at"];
 var TIMEZONE = "America/Chicago";
 
+var SITE_URL = "https://fifthfloorpressbooks.com";
+
 function doPost(e) {
+  var form = isFormPost_(e || {});
+  var result;
   try {
-    return json_(handlePost_(e || {}));
+    result = handlePost_(e || {});
   } catch (err) {
     console.error(err);
-    return json_({ ok: false, error: "Could not save that signup." });
+    result = { ok: false, error: "Could not save that signup." };
   }
+  return form ? thanksPage_(result, e.parameter || {}) : json_(result);
+}
+
+/* A plain HTML form post (JavaScript off) arrives form-encoded with
+   format=form. The JS path posts text/plain JSON and gets JSON back. */
+function isFormPost_(e) {
+  var type = (e.postData && e.postData.type) ? String(e.postData.type) : "";
+  if (type.indexOf("application/x-www-form-urlencoded") === 0) return true;
+  if (type.indexOf("multipart/form-data") === 0) return true;
+  return !!(e.parameter && e.parameter.format === "form");
+}
+
+/* Apps Script cannot send a real 302 from doPost, so return a small page
+   that sends the visitor's whole tab to thanks.html (target _top escapes
+   the Apps Script sandbox frame) and keeps a plain link as a fallback. */
+function thanksPage_(result, params) {
+  var source = String(params.source || "");
+  var status = result.ok ? (result.duplicate ? "already" : "ok") : "error";
+  var url = SITE_URL + "/thanks.html?status=" + status +
+    "&source=" + encodeURIComponent(source.slice(0, 120));
+  var msg = result.ok
+    ? (result.duplicate ? "You\u2019re already on the list." : "You\u2019re on the list. Thank you.")
+    : (result.error || "We couldn\u2019t save that just now.");
+  var safeUrl = url.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+  var html = '<!DOCTYPE html><html><head><meta charset="utf-8">' +
+    '<meta name="viewport" content="width=device-width, initial-scale=1">' +
+    '<base target="_top"><title>Fifth Floor Press</title></head>' +
+    '<body style="font-family:Georgia,serif;background:#100e0c;color:#f4f0e6;padding:2rem;">' +
+    '<p>' + escapeHtml_(msg) + '</p>' +
+    '<p><a style="color:#e7b8b4" href="' + safeUrl + '">Continue to Fifth Floor Press</a></p>' +
+    '<script>try{window.top.location.href=' + JSON.stringify(url) + ';}catch(e){}</script>' +
+    '</body></html>';
+  return HtmlService.createHtmlOutput(html)
+    .setTitle("Fifth Floor Press")
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+
+function escapeHtml_(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
 function doGet(e) {
@@ -98,7 +141,7 @@ function unsubscribe_(token) {
 }
 
 function readBody_(e) {
-  if (e.postData && e.postData.contents) {
+  if (e.postData && e.postData.contents && !isFormPost_(e)) {
     try {
       var parsed = JSON.parse(e.postData.contents);
       if (parsed && typeof parsed === "object") return parsed;

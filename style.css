@@ -417,6 +417,13 @@ button {
 
 .hero-bleed .buy-kindle:hover { background: rgba(244, 240, 230, 0.08); }
 
+.signup .buy-kindle {
+  color: var(--cream);
+  border-color: rgba(244, 240, 230, 0.6);
+  background: transparent;
+}
+.signup .buy { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0; }
+
 .buy-soon {
   background: transparent;
   color: var(--muted);

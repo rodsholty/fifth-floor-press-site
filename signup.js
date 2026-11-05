@@ -27,6 +27,13 @@
     return path;
   }
 
+  /* A hidden source input (e.g. "/scattering#audiobook") wins over the path. */
+  function sourceTag(form) {
+    var input = form.querySelector("input[name='source']");
+    var value = input && input.value ? input.value : "";
+    return value || sourcePage();
+  }
+
   function previewKind() {
     var params;
     try { params = new URLSearchParams(window.location.search); }
@@ -111,7 +118,7 @@
         email: email,
         name: name,
         consent: true,
-        source: sourcePage(),
+        source: sourceTag(form),
         company: ""
       };
 
