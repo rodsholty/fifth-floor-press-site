@@ -396,13 +396,15 @@ button {
   border-color: var(--signal);
 }
 
-.buy-kindle {
+.buy-kindle,
+.buy-audible {
   background: transparent;
   color: var(--ink);
 }
 
 .buy-paper:hover { background: var(--signal-dark); border-color: var(--signal-dark); }
-.buy-kindle:hover { background: #f3e4e1; }
+.buy-kindle:hover,
+.buy-audible:hover { background: #f3e4e1; }
 
 .hero-bleed .buy-paper {
   background: var(--signal);
@@ -410,15 +412,18 @@ button {
   border-color: var(--signal);
 }
 
-.hero-bleed .buy-kindle {
+.hero-bleed .buy-kindle,
+.hero-bleed .buy-audible {
   color: var(--cream);
   border-color: rgba(244, 240, 230, 0.6);
   background: transparent;
 }
 
-.hero-bleed .buy-kindle:hover { background: rgba(244, 240, 230, 0.08); }
+.hero-bleed .buy-kindle:hover,
+.hero-bleed .buy-audible:hover { background: rgba(244, 240, 230, 0.08); }
 
-.signup .buy-kindle {
+.signup .buy-kindle,
+.signup .buy-audible {
   color: var(--cream);
   border-color: rgba(244, 240, 230, 0.6);
   background: transparent;
