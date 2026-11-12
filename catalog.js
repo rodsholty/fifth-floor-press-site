@@ -17,7 +17,7 @@ var CATALOG = {
     { id: "resignation", title: "Resignation", author: "R. J. Marek", page: "marek.html#resignation", kindle: "https://www.amazon.com/dp/B0H3M3XQ45", paper: "https://www.amazon.com/dp/B0HMJRS5XF", cover: "covers/resignation.jpg", w: 167, h: 268 },
     { id: "koshaku", title: "Koshaku", author: "R. J. Marek", page: "marek.html#koshaku", kindle: "https://www.amazon.com/dp/B0HL5MXW6R", paper: "https://www.amazon.com/dp/B0HKH1K821", cover: "covers/koshaku.jpg", w: 167, h: 268 },
     { id: "candid", title: "Candid", author: "R. J. Marek", page: "marek.html#candid", kindle: "https://www.amazon.com/dp/B0HKH33C78", paper: "https://www.amazon.com/dp/B0HKH51Z2S", cover: "covers/candid.jpg", w: 167, h: 268 },
-    { id: "try-the-spirits", title: "Try the Spirits", author: "R. J. Marek", page: "marek.html#try-the-spirits", kindle: "https://www.amazon.com/dp/B0HK1KGHK5", paper: "https://www.amazon.com/dp/B0HK21F5SR", cover: "covers/try-the-spirits.jpg", w: 167, h: 268 },
+    { id: "try-the-spirits", title: "Try the Spirits", author: "R. J. Marek", page: "marek.html#try-the-spirits", kindle: "https://www.amazon.com/dp/B0HK1KGHK5", paper: "https://www.amazon.com/dp/B0HK21F5SR", audible: "https://www.audible.com/pd/Try-the-Spirits-Audiobook/B0HNZPVSBX", cover: "covers/try-the-spirits.jpg", w: 167, h: 268 },
     { id: "last-chair", title: "Last Chair", author: "R. J. Marek", page: "marek.html#last-chair", kindle: "https://www.amazon.com/dp/B0HCK37SJG", paper: "https://www.amazon.com/dp/B0HCK9F65M", cover: "covers/last-chair.jpg", w: 240, h: 384 },
     { id: "the-scattering", title: "The Scattering", author: "R. J. Marek", page: "marek.html#the-scattering", kindle: "https://www.amazon.com/dp/B0HKGPR52R", paper: "https://www.amazon.com/dp/B0HKH228V4", cover: "covers/the-scattering.jpg", w: 167, h: 268 },
     { id: "the-long-winter", title: "The Long Winter", author: "R. J. Marek", page: "marek.html#the-long-winter", kindle: "https://www.amazon.com/dp/B0HNCPJHZY", paper: "https://www.amazon.com/dp/B0HND1K8XD", cover: "covers/the-long-winter.jpg", w: 167, h: 268 },
@@ -124,6 +124,7 @@ function buyBox(book) {
   else if (tracksAsin && book.paperAsin !== undefined && kindle) buy.appendChild(comingSoonLink(book, "Paperback coming soon"));
   if (kindle) buy.appendChild(buyLink(kindle, "buy-kindle", "Buy on Kindle", "Buy " + book.title + " on Kindle"));
   else if (tracksAsin && book.kindleAsin !== undefined && paper) buy.appendChild(comingSoonLink(book, "Kindle coming soon"));
+  if (book.audible) buy.appendChild(buyLink(book.audible, "buy-audible", "Listen on Audible", "Listen to " + book.title + " on Audible"));
   if (!paper && !kindle && tracksAsin) buy.appendChild(comingSoonLink(book));
   return buy;
 }
@@ -177,6 +178,7 @@ function renderBioGrid(root) {
     a.setAttribute("data-author", book.author);
     a.setAttribute("data-kindle", kindleHref);
     a.setAttribute("data-paper", paperHref);
+    a.setAttribute("data-audible", book.audible || "");
     a.setAttribute("data-search", searchHref);
     var img = document.createElement("img");
     img.src = prefix + book.cover;
@@ -218,6 +220,7 @@ function applyFeaturedBook() {
   var author = tile.getAttribute("data-author");
   var kindle = tile.getAttribute("data-kindle") || "";
   var paper = tile.getAttribute("data-paper") || "";
+  var audible = tile.getAttribute("data-audible") || "";
   var search = tile.getAttribute("data-search") || "";
   var img = tile.querySelector("img");
   var cover = document.getElementById("featured-cover");
@@ -242,6 +245,17 @@ function applyFeaturedBook() {
   if (paperOnly || pending) paperBtn.setAttribute("hidden", "");
   else paperBtn.removeAttribute("hidden");
   paperBtn.setAttribute("aria-label", "Buy Paperback of " + title);
+  var audibleBtn = document.getElementById("featured-audible");
+  if (audibleBtn) {
+    if (audible) {
+      audibleBtn.href = audible;
+      audibleBtn.textContent = "Listen on Audible";
+      audibleBtn.setAttribute("aria-label", "Listen to " + title + " on Audible");
+      audibleBtn.removeAttribute("hidden");
+    } else {
+      audibleBtn.setAttribute("hidden", "");
+    }
+  }
 }
 
 renderFifthFloorCatalog();
